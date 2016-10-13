@@ -1,0 +1,311 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Usuários | Quantum</title>
+
+    <!-- Vendor CSS -->
+    <link href="vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css" rel="stylesheet">
+    <link href="vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet">
+    <link href="vendors/bower_components/datatables.net-dt/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/responsive/2.1.0/css/responsive.dataTables.min.css" rel="stylesheet">
+
+    <!-- CSS -->
+    <link href="css/app_1.min.css" rel="stylesheet">
+    <link href="css/app_2.min.css" rel="stylesheet">
+
+</head>
+<body>
+    <header id="header" class="clearfix" data-ma-theme="teal">
+        <ul class="h-inner">
+            <li class="hi-trigger ma-trigger" data-ma-action="sidebar-open" data-ma-target="#sidebar">
+                <div class="line-wrap">
+                    <div class="line top"></div>
+                    <div class="line center"></div>
+                    <div class="line bottom"></div>
+                </div>
+            </li>
+
+            <li class="hi-logo">
+                <a href="home.html" class="m-l-10">
+                    Usuários
+                </a>
+            </li>
+
+            <li class="pull-right">
+                <ul class="hi-menu">
+
+                    <li data-ma-action="search-open">
+                        <a href="#"><i class="him-icon zmdi zmdi-search"></i></a>
+                    </li>
+
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" href="#"><i class="him-icon zmdi zmdi-more-vert"></i></a>
+                        <ul class="dropdown-menu dm-icon pull-right">
+                            <li class="hidden-xs">
+                                <a data-ma-action="fullscreen" href="#"><i class="zmdi zmdi-fullscreen"></i> Fullscreen</a>
+                            </li>
+                            <li>
+                                <a data-ma-action="clear-localstorage" href="#"><i class="zmdi zmdi-delete"></i> Limpar Cache</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" onclick="signout()" alt="Sair"><i class="zmdi zmdi-time-restore"></i> Sair</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+        <!-- Top Search Content -->
+        <div class="h-search-wrap">
+            <div class="hsw-inner">
+                <i class="hsw-close zmdi zmdi-arrow-left" data-ma-action="search-close"></i>
+                <input type="text">
+            </div>
+        </div>
+    </header>
+
+    <section id="main">
+        <aside id="sidebar" class="sidebar c-overflow">
+            <div class="s-profile">
+                <a href="#" data-ma-action="profile-menu-toggle">
+                    <div class="sp-pic avatar">
+                        <img class="img-circle profile-image" src="images/profile.jpg" alt="profile">
+                    </div>
+
+                    <div class="sp-info nomeUsuario">
+                        <i class="zmdi zmdi-caret-down"></i>
+                    </div>
+                </a>
+
+                <ul class="main-menu">
+                    <li>
+                        <a href="profile-about.html"><i class="zmdi zmdi-account"></i> Meu Perfil</a>
+                    </li>
+                </ul>
+            </div>
+
+            <ul class="main-menu">
+                <li><a href="home.html"><i class="zmdi zmdi-home"></i> Início</a></li>
+                <li><a href="tickets.html"><i class="zmdi zmdi-view-list"></i> Tickets</a></li>
+                <li class="sub-menu">
+                    <a href="#" data-ma-action="submenu-toggle"><i class="zmdi zmdi-settings"></i> Administrativo</a>
+                    <ul>
+                        <li class="toggled active"><a href="usuarios.html">Usuários</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </aside>
+
+        <aside id="chat" class="sidebar"></aside>
+
+        <section id="content">
+            <div class="container">
+
+                <!-- Add button -->
+                <button class="btn btn-float bgm-green m-btn" onclick="$('#formModal').modal()"><i class="zmdi zmdi-plus"></i></button>
+
+                <div class="card">
+
+                    <div id="success" class="alert alert-success alert-dismissable" style="display:none;">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        O usuário <span class="MSGnomeUsuario"></span> foi inserido com sucesso.
+                    </div>
+                    <div id="successEditar" class="alert alert-success alert-dismissable" style="display:none;">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        O usuário <span class="MSGnomeUsuario"></span> foi alterado com sucesso.
+                    </div>
+                    <div id="successExcluir" class="alert alert-success alert-dismissable" style="display:none;">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        O usuário <span class="MSGnomeUsuario"></span> foi excluído com sucesso.
+                    </div>
+                    <div id="erro" class="alert alert-danger alert-dismissable" style="display:none;">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <strong>Atenção!</strong> Ocorreu um problema. Tente novamente.
+                    </div>
+                    <div id="confirmaExclusao" class="alert alert-danger alert-dismissable" style="display:none;">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <strong>Atenção!</strong> Deseja realmente excluir esse usuário?<br>
+                        <button onclick="concluirExclusao()">Sim</button>
+                    </div>				
+
+                    <div class="table-responsive">
+                        <table id="example" class="table table-striped table-bordered responsive nowrap" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nome</th>
+                                    <th>Email</th>
+                                    <th>Perfil</th>
+                                    <th>Alterar</th>
+                                    <th>Excluir</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="repeat">
+                                    <td class="field" data="codUsuario"></td>
+                                    <td class="field" data="strNome"></td>
+                                    <td class="field" data="strLogin"></td>
+                                    <td class="field" data="strPerfil"></td>
+                                    <td style="text-align:center;"><a href="javascript:void(0);" onclick="editarUsuario(this)" data-toggle="modal" data-target="#formModalEdicao" alt="Alterar"><i class="zmdi zmdi-edit"></i></a></td>
+                                    <td style="text-align:center;">
+                                        <a href="javascript:void(0);" onclick="excluirUsuario(this)" alt="Excluir"><i class="zmdi zmdi-delete"></i></a>
+                                        <div class="pull-right">
+                                            <div class="actions dropdown">
+                                                <a href="#" data-toggle="dropdown" aria-expanded="true">
+                                                    <i class="zmdi zmdi-more-vert"></i>
+                                                </a>
+
+                                                <ul class="dropdown-menu dropdown-menu-right">
+                                                    <li>
+                                                        <a href="javascript:void(0);" onclick="editarUsuario(this)" data-toggle="modal" data-target="#formModalEdicao" alt="Alterar"><i class="zmdi zmdi-edit"></i> Alterar</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0);" onclick="excluirUsuario(this)" alt="Excluir"><i class="zmdi zmdi-delete"></i> Excluir</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </section>
+
+    <footer id="footer">
+        Copyright &copy; 2016 Quantum
+    </footer>
+
+    <!-- Page Loader -->
+    <div class="page-loader">
+        <div class="preloader pls-blue">
+            <svg class="pl-circular" viewBox="25 25 50 50">
+                <circle class="plc-path" cx="50" cy="50" r="20" />
+            </svg>
+
+            <p>Carregando...</p>
+        </div>
+    </div>
+
+    <!-- Javascript Libraries -->
+    <script src="vendors/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <script src="vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="vendors/bower_components/Waves/dist/waves.min.js"></script>
+    <script src="vendors/bootstrap-growl/bootstrap-growl.min.js"></script>
+    <script src="vendors/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js"></script>
+
+    <script src="js/app.min.js"></script>
+
+    <script src="scripts/validate.js"></script>
+    <script src="scripts/LINQ_JS_MIN.js"></script>
+    <script src="scripts/config.js"></script>
+    <script src="services/usuario.js"></script>
+    <script src="scripts/usuarios.js"></script>
+    <script src="scripts/util.js"></script>
+
+    <!-- Form Modal Inserir -->
+    <div class="modal fade" id="formModal" role="dialog" data-backdrop="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel"> Novo Usuário</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="formInclusao" name="formInclusao" class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <div class="col-sm-10">
+                                <div class="fg-line">
+                                    <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-10">
+                                <div class="fg-line">
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-10">
+                                <div class="fg-line">
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Senha">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-10">
+                                <div class="fg-line">
+                                    <input type="password" class="form-control" id="confirmapassword" name="confirmapassword" placeholder="Confirmar Senha">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn bgm-teal" onClick="inserirUsuario()">Salvar</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Form Modal -->
+
+    <!-- Form Modal Editar -->
+    <div class="modal fade" id="formModalEdicao" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel"> Alterar Usuário</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="formEdicao" name="formEdicao" class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label for="nomeEdicao" class="col-sm-2 control-label">Nome</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="nomeEdicao" name="nomeEdicao" placeholder="Digite o nome">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="emailEdicao" class="col-sm-2 control-label">Email</label>
+                            <div class="col-sm-10">
+                                <input type="email" class="form-control" id="emailEdicao" name="emailEdicao" placeholder="Digite o email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="perfilEdicao" class="col-sm-2 control-label">Perfil</label>
+                            <div class="col-sm-10">
+                                <div class="select">
+                                    <select id="perfilEdicao" name="perfilEdicao" class="form-control"></select>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" id="codUsuarioEdicao" />
+                    <button type="button" class="btn bgm-teal" onClick="salvarUsuario()">Salvar</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Form Modal Editar -->
+
+</body>
+
+</html>
