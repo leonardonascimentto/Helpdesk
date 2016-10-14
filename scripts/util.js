@@ -86,4 +86,86 @@ function dataBr() {
 $(function(){
 	$('.avatar .img-circle').attr('onError', "this.src = 'images/profile.jpg'");
 	$('.avatar .img-circle').attr('src',configuracoes.baseURL + 'imagens/fotos/u' + session.get('codUsuario') + '.png');
+	
+	carregaMenu();
 })
+
+function carregaMenu() {
+   
+   menuService.get(function(data) {
+         var menuCompleto = $.parseJSON(data);
+      
+         var montaMenu = function(ulMenu, menu) {
+            ulMenu.show();
+            $(menu).each(function(i,e) {
+            
+            var filhos = menuCompleto.where(function(m) { return m.codMenuPai == e.codMenu;});
+            
+            var li;
+            
+            if (filhos.length == 0)
+               li = getItemFilho(e.strMenu, e.strLink, e.strIcone);
+            else {
+               li = getItemPai(e.strMenu, e.strIcone);
+               
+               var ul = li.find('ul');
+               montaMenu(ul, filhos);
+            }
+            
+            ulMenu.append(li);
+         });
+      }
+      
+      var ulMenu = $('#ulMenu');
+      data = $.parseJSON(data);
+      data = data.where(function(m) {return m.codMenuPai == null; }).orderBy(function(m) { return m.intOrdem; });
+      
+      montaMenu(ulMenu, data);  
+      
+   });
+   
+}
+
+function getItemFilho(label, link, icon) {   
+   label = $.trim(label);
+   link = configuracoes.baseSite + $.trim(link);
+   
+   var classeAtivo = '';
+   var enderecoAtual = location.href;
+   if (enderecoAtual.indexOf(link) > -1)
+   {
+      classeAtivo = 'active';
+   }
+   
+   var obj = '<li class="' + classeAtivo + '"><a href="' + link + '" title="Início"><i class="' + icon + '"></i>'+ label +'</a></li>';
+   
+   return $(obj);
+}
+
+function getItemPai(label, icon) {
+   label = $.trim(label);
+   
+   var li = $('<li>').attr('class', 'nav-dropdown so_adm');
+   var a = $('<a>').attr('href', '#').click(function() {
+      var self = $(this);
+      
+      var liPai = self.parent();
+      var ulFilha = liPai.find('ul');
+      
+      ulFilha.toggle();
+      
+   }).attr('title', label);
+   li.append(a);
+   
+   var img = $('<i>').attr('class', icon);
+   a.append(img);
+   
+   var span = $('<span>').text(label);
+   a.append(span);
+   
+   var ul = $('<ul>').addClass('nav-sub');
+   li.append(ul);  
+  
+
+   return li;
+}

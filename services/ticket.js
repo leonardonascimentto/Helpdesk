@@ -98,8 +98,8 @@ ticketService.salvaStatus = function(codTicket, codStatus) {
     $.ajax({            //Função AJAX
         url: configuracoes.baseURL + "entities/TicketUpdateStatus.asp",          //Arquivo asp
         type: "get",                //Método de envio
-        data: "codTicket="+codTicket+"&codStatus="+codStatus,   //Dados
-        success: success,
+        data: "codTicket="+codTicket+"&codStatus="+codStatus   //Dados
+        //success: success,
     })
 }
 
@@ -108,7 +108,6 @@ ticketService.salvaCategoria = function(codTicket, codCategoria) {
     $.ajax({            //Função AJAX
         url: configuracoes.baseURL + "entities/TicketUpdateCategoria.asp",          //Arquivo asp
         type: "get",                //Método de envio
-        data: "codTicket="+codTicket+"&codCategoria="+codCategoria,   //Dados
-        success: success,
+        data: "codTicket="+codTicket+"&codCategoria="+codCategoria
     })
 }

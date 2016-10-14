@@ -79,10 +79,10 @@ function inserirUsuario() {
 				usuarioData.Perfil = result[0].strPerfil;
 				usuarioData.Adm = result[0].boolAdm;
 
-				linkEditar = $('<a href="javascript:void(0)" onclick="editarUsuario(this)" data-toggle="modal" data-target="#formModalEdicao" alt="Alterar"><i class="fa fa-user"></i></a>');
+				linkEditar = $('<a href="javascript:void(0)" onclick="editarUsuario(this)" data-toggle="modal" data-target="#formModalEdicao" alt="Alterar"><i class="zmdi zmdi-edit"></i></a>');
 				usuarioData.linkEditar = linkEditar;
 				
-				linkExcluir = $('<a href="javascript:void(0);" onclick="excluirUsuario(this)" alt="Excluir"><i class="fa fa-times"></i></a>');
+				linkExcluir = $('<a href="javascript:void(0);" onclick="excluirUsuario(this)" alt="Excluir"><i class="zmdi zmdi-delete"></i></a>');
 				usuarioData.linkExcluir = linkExcluir;
 				
 				inserirTabela(usuarioData);
@@ -268,9 +268,9 @@ $(function () {
                 columnDefs: [
                     { responsivePriority: 1, targets: 0 },
                     { responsivePriority: 2, targets: -5 }
-                ],
-				dom: 'Bfrtip',
-                buttons: ['print', 'excel', 'pdf']
+                ]
+				//dom: 'Bfrtip',
+                //buttons: ['print', 'excel', 'pdf']
 
             });
 

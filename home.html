@@ -39,9 +39,9 @@
             <li class="pull-right">
                 <ul class="hi-menu">
 
-                    <li data-ma-action="search-open">
+                    <!--<li data-ma-action="search-open">
                         <a href="#"><i class="him-icon zmdi zmdi-search"></i></a>
-                    </li>
+                    </li>-->
 
                     <li class="dropdown">
                         <a data-toggle="dropdown" href="#"><i class="him-icon zmdi zmdi-more-vert"></i></a>
@@ -49,14 +49,14 @@
                             <li class="hidden-xs">
                                 <a data-ma-action="fullscreen" href="#"><i class="zmdi zmdi-fullscreen"></i> Fullscreen</a>
                             </li>
-                            <li>
+                            <!--<li>
                                 <a data-ma-action="clear-localstorage" href="#"><i class="zmdi zmdi-delete"></i> Limpar cache</a>
-                            </li>
+                            </li>-->
                             <li>
                                 <a href="javascript:void(0);" onclick="signout()" alt="Sair"><i class="zmdi zmdi-time-restore"></i> Sair</a>
                             </li>
                         </ul>
-                    </li>                    
+                    </li>
                 </ul>
             </li>
         </ul>
@@ -83,14 +83,14 @@
                     </div>
                 </a>
 
-                <ul class="main-menu">
+                <!--<ul class="main-menu">
                     <li>
                         <a href="profile-about.html"><i class="zmdi zmdi-account"></i> Meu Perfil</a>
                     </li>
-                </ul>
+                </ul>-->
             </div>
 
-            <ul class="main-menu">
+            <ul class="main-menu" id="ulMenu">
                 <li class="toggled active"><a href="home.html"><i class="zmdi zmdi-home"></i> Início</a></li>
                 <li><a href="tickets.html"><i class="zmdi zmdi-view-list"></i> Tickets</a></li>
                 <li class="sub-menu">
@@ -168,7 +168,7 @@
 
     <!-- Page Loader -->
     <div class="page-loader">
-        <div class="preloader pls-blue">
+        <div class="preloader pls-green">
             <svg class="pl-circular" viewBox="25 25 50 50">
                 <circle class="plc-path" cx="50" cy="50" r="20" />
             </svg>
@@ -202,7 +202,9 @@
     <script src="scripts/jquery.cookie.js"></script>
     <script src="scripts/home.js"></script>
     <script src="scripts/util.js"></script>
+	<script src="scripts/LINQ_JS_MIN.js"></script>
     <script src="services/ticket.js"></script>
+	<script src="services/menu.js"></script>
 </body>
 
 </html>

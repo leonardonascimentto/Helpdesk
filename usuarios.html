@@ -38,9 +38,9 @@
             <li class="pull-right">
                 <ul class="hi-menu">
 
-                    <li data-ma-action="search-open">
+                    <!--<li data-ma-action="search-open">
                         <a href="#"><i class="him-icon zmdi zmdi-search"></i></a>
-                    </li>
+                    </li>-->
 
                     <li class="dropdown">
                         <a data-toggle="dropdown" href="#"><i class="him-icon zmdi zmdi-more-vert"></i></a>
@@ -48,9 +48,9 @@
                             <li class="hidden-xs">
                                 <a data-ma-action="fullscreen" href="#"><i class="zmdi zmdi-fullscreen"></i> Fullscreen</a>
                             </li>
-                            <li>
+                            <!--<li>
                                 <a data-ma-action="clear-localstorage" href="#"><i class="zmdi zmdi-delete"></i> Limpar Cache</a>
-                            </li>
+                            </li>-->
                             <li>
                                 <a href="javascript:void(0);" onclick="signout()" alt="Sair"><i class="zmdi zmdi-time-restore"></i> Sair</a>
                             </li>
@@ -82,20 +82,20 @@
                     </div>
                 </a>
 
-                <ul class="main-menu">
+                <!--<ul class="main-menu">
                     <li>
                         <a href="profile-about.html"><i class="zmdi zmdi-account"></i> Meu Perfil</a>
                     </li>
-                </ul>
+                </ul>-->
             </div>
 
             <ul class="main-menu">
                 <li><a href="home.html"><i class="zmdi zmdi-home"></i> Início</a></li>
                 <li><a href="tickets.html"><i class="zmdi zmdi-view-list"></i> Tickets</a></li>
-                <li class="sub-menu">
+                <li class="sub-menu active toggled">
                     <a href="#" data-ma-action="submenu-toggle"><i class="zmdi zmdi-settings"></i> Administrativo</a>
                     <ul>
-                        <li class="toggled active"><a href="usuarios.html">Usuários</a></li>
+                        <li><a class="active" href="usuarios.html">Usuários</a></li>
                     </ul>
                 </li>
             </ul>
@@ -151,10 +151,12 @@
                                     <td class="field" data="strNome"></td>
                                     <td class="field" data="strLogin"></td>
                                     <td class="field" data="strPerfil"></td>
-                                    <td style="text-align:center;"><a href="javascript:void(0);" onclick="editarUsuario(this)" data-toggle="modal" data-target="#formModalEdicao" alt="Alterar"><i class="zmdi zmdi-edit"></i></a></td>
+                                    <td style="text-align:center;">
+                                        <a href="javascript:void(0);" onclick="editarUsuario(this)" data-toggle="modal" data-target="#formModalEdicao" alt="Alterar"><i class="zmdi zmdi-edit"></i></a>
+                                    </td>
                                     <td style="text-align:center;">
                                         <a href="javascript:void(0);" onclick="excluirUsuario(this)" alt="Excluir"><i class="zmdi zmdi-delete"></i></a>
-                                        <div class="pull-right">
+                                        <!--<div class="pull-right">
                                             <div class="actions dropdown">
                                                 <a href="#" data-toggle="dropdown" aria-expanded="true">
                                                     <i class="zmdi zmdi-more-vert"></i>
@@ -169,7 +171,7 @@
                                                     </li>
                                                 </ul>
                                             </div>
-                                        </div>
+                                        </div>-->
                                     </td>
                                 </tr>
                             </tbody>
@@ -187,7 +189,7 @@
 
     <!-- Page Loader -->
     <div class="page-loader">
-        <div class="preloader pls-blue">
+        <div class="preloader pls-green">
             <svg class="pl-circular" viewBox="25 25 50 50">
                 <circle class="plc-path" cx="50" cy="50" r="20" />
             </svg>
