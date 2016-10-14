@@ -7,7 +7,7 @@
     <author email="contato@redintel.com.br" href="http://www.redintel.com.br">
         Redintel
     </author>
-    <content src="index.html" />
+    <content src="home.html" />
     <plugin name="cordova-plugin-whitelist" spec="1" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
