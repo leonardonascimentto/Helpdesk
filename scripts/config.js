@@ -1,3 +1,4 @@
 var configuracoes = {
-    baseURL: 'http://www.quantumapp.com.br/'
+    baseURL: 'http://www.quantumapp.com.br/',
+	baseSite: '/'
 };

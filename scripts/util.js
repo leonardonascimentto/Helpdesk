@@ -134,7 +134,7 @@ function getItemFilho(label, link, icon) {
    var enderecoAtual = location.href;
    if (enderecoAtual.indexOf(link) > -1)
    {
-      classeAtivo = 'active';
+       classeAtivo = 'toggled active';
    }
    
    var obj = '<li class="' + classeAtivo + '"><a href="' + link + '" title="Início"><i class="' + icon + '"></i>'+ label +'</a></li>';
@@ -145,7 +145,7 @@ function getItemFilho(label, link, icon) {
 function getItemPai(label, icon) {
    label = $.trim(label);
    
-   var li = $('<li>').attr('class', 'nav-dropdown so_adm');
+   var li = $('<li>').attr('class', 'sub-menu so_adm');
    var a = $('<a>').attr('href', '#').click(function() {
       var self = $(this);
       

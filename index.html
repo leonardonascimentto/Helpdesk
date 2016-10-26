@@ -13,6 +13,14 @@
     <!-- CSS -->
     <link href="css/app_1.min.css" rel="stylesheet">
     <link href="css/app_2.min.css" rel="stylesheet">
+
+    <style>
+        .error {
+            font-size: 12px;
+            color: red;
+        }
+    </style>
+
 </head>
 <body>
     <div class="login-content">
@@ -29,22 +37,22 @@
                     <div class="input-group m-b-20">
                         <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
                         <div class="fg-line">
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+                            <input type="email" class="form-control" id="emailLogin" name="emailLogin" placeholder="Email">
                         </div>
                     </div>
                     <div class="input-group m-b-20">
                         <span class="input-group-addon"><i class="zmdi zmdi-lock"></i></span>
                         <div class="fg-line">
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Senha">
+                            <input type="password" class="form-control" id="passwordLogin" name="passwordLogin" placeholder="Senha">
                         </div>
                     </div>
-                    <div class="checkbox">
+                    <!--<div class="checkbox">
                         <label>
                             <input type="checkbox" value="">
                             <i class="input-helper"></i>
                             Manter conectado
                         </label>
-                    </div>
+                    </div>-->
                     <button type="submit" class="btn btn-login btn-success btn-float"><i class="zmdi zmdi-arrow-forward"></i></button>
                 </div>
             </form>
@@ -73,7 +81,31 @@
                     <div class="input-group m-b-20">
                         <span class="input-group-addon"><i class="zmdi zmdi-email"></i></span>
                         <div class="fg-line">
-                            <input type="text" class="form-control" id="email" name="email" placeholder="Email">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="input-group m-b-20">
+                        <span class="input-group-addon"><i class="zmdi zmdi-graduation-cap"></i></span>
+                        <div class="fg-line">
+                            <input type="text" class="form-control" id="ra" name="ra" placeholder="Ra">
+                        </div>
+                    </div>
+                    <div class="input-group m-b-20">
+                        <span class="input-group-addon"><i class="zmdi zmdi-assignment-account"></i></span>
+                        <div class="fg-line">
+                            <input type="text" class="form-control" id="cpf" name="cpf" placeholder="Cpf">
+                        </div>
+                    </div>
+                    <div class="input-group m-b-20">
+                        <span class="input-group-addon"><i class="zmdi zmdi-phone"></i></span>
+                        <div class="fg-line">
+                            <input type="text" class="form-control" id="telefone" name="telefone" placeholder="Telefone">
+                        </div>
+                    </div>
+                    <div class="input-group m-b-20">
+                        <span class="input-group-addon"><i class="zmdi zmdi-smartphone"></i></span>
+                        <div class="fg-line">
+                            <input type="text" class="form-control" id="celular" name="celular" placeholder="Celular">
                         </div>
                     </div>
                     <div class="input-group m-b-20">
@@ -83,7 +115,7 @@
                         </div>
                     </div>
                     <div class="input-group m-b-20">
-                        <span class="input-group-addon"><i class="zmdi zmdi-lock"></i></span>
+                        <span class="input-group-addon"><i class="zmdi zmdi-lock-outline"></i></span>
                         <div class="fg-line">
                             <input type="password" class="form-control" id="confirmapassword" name="confirmapassword" placeholder="Confirmar Senha">
                         </div>
@@ -101,7 +133,7 @@
         <div class="lc-block" id="l-forget-password">
 
             <div id="sucessoesqueci" class="alert alert-success" role="alert" style="display: none">
-                Sua senha foi enviada para o seu email.
+                Sua senha foi enviada para o email informado.
             </div>
 
             <div id="erroesqueci" class="alert alert-danger" role="alert" style="display: none">
@@ -114,7 +146,7 @@
                     <div class="input-group m-b-20">
                         <span class="input-group-addon"><i class="zmdi zmdi-email"></i></span>
                         <div class="fg-line">
-                            <input type="text" class="form-control" id="emailesqueci" name="emailesqueci" placeholder="Email">
+                            <input type="email" class="form-control" id="emailesqueci" name="emailesqueci" placeholder="Email">
                         </div>
                     </div>
                     <button type="button" onclick="enviarEmail(); return false;" class="btn btn-login btn-success btn-float"><i class="zmdi zmdi-mail-send"></i></button>
@@ -124,7 +156,7 @@
                     <a href="#" data-ma-action="login-switch" data-ma-block="#l-register"><i class="zmdi zmdi-plus"></i> <span>Cadastrar</span></a>
                 </div>
             </form>
-        </div>        
+        </div>
     </div>
 
     <!-- Javascript Libraries -->
@@ -132,37 +164,43 @@
     <script src="vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="vendors/bower_components/Waves/dist/waves.min.js"></script>
 
-    <script src="scripts/config.js"></script>
+    <script src="vendors/bower_components/jquery-mask-plugin/dist/jquery.mask.min.js"></script>
 
     <script src="js/app.min.js"></script>
 
+    <script src="scripts/config.js"></script>
     <script src="scripts/login.js"></script>
-
     <script src="scripts/validate.js"></script>
-
     <script src="services/usuario.js"></script>
-
     <script src="scripts/esqueciSenha.js"></script>
-
-    <script src="scripts/util.js"></script>  
+    <script src="scripts/util.js"></script>
+    <script src="services/menu.js"></script>
 
     <script>
         $(document).ready(function () {
+            $("#cpf").mask("000.000.000-00");
+            $("#telefone").mask("(00) 0000-0000");
+            $("#celular").mask("(00) 00000-0000");
             $('#formcadastro').validate({
                 rules: {
                     nome: {
-                        required: true
+                        required: true,
+                        maxlength: 50
                     },
                     email: {
                         required: true,
                         email: true,
-                        remote: configuracoes.baseURL + 'verificar_email.asp'
+                        maxlength: 100,
+                        remote: configuracoes.baseURL + 'entities/VerificarEmail.asp'
+                    },
+                    ra: {
+                        number: true,
+                        maxlength: 10
                     },
                     password: {
                         required: true,
                         minlength: 4,
                         maxlength: 15
-
                     },
                     confirmapassword: {
                         required: true,
@@ -173,12 +211,18 @@
                 },
                 messages: {
                     nome: {
-                        required: "Digite seu nome"
+                        required: "Digite seu nome",
+                        maxlength: "O campo \"Nome\" pode ter, no máximo, 50 caracteres"
                     },
                     email: {
                         required: "Digite seu email",
                         email: "O campo \"Email\" deve conter um email válido",
+                        maxlength: "O campo \"Email\" pode ter, no máximo, 100 caracteres",
                         remote: "O email informado já está em uso. Escolha outro email"
+                    },
+                    ra: {
+                        number: "Digite apenas números",
+                        maxlength: "O campo \"Ra\" pode ter, no máximo, 10 caracteres"
                     },
                     password: {
                         required: "Digite uma senha",
@@ -200,9 +244,13 @@
             $('#formcadastro').submit(function () {   //Ao submeter formulário
                 var nome = $('#nome').val();    //Pega valor do campo nome
                 var email = $('#email').val();  //Pega valor do campo email
+                var ra = $('#ra').val();  //Pega valor do campo email
+                var cpf = $('#cpf').val();  //Pega valor do campo email
+                var telefone = $('#telefone').val();  //Pega valor do campo email
+                var celular = $('#celular').val();  //Pega valor do campo email
                 var password = $('#password').val();  //Pega valor do campo senha
 
-                var usuarioData = { nome: nome, email: email, password: password };
+                var usuarioData = { nome: nome, email: email, ra: ra, cpf: cpf, telefone: telefone, celular: celular, password: password, codPerfil: 0 };
                 var success = function (result) {         //Sucesso no AJAX
                     if (result != '0') {
                         location.href = 'index.html'  //Redireciona

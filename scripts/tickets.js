@@ -259,6 +259,20 @@ $(function () {
 				
                 clone.appendTo(pai);
             });
+			
+			//$('td[data=codTicket]').each(function (i, e) {
+            //    var td = $(e);
+
+            //    td.html('<div data="codTicket" style="width:30px; overflow: hidden">' + td.text() + '</div>');
+
+            //});
+			
+			$('td[data=strAssunto]').each(function(i, e) {
+				var td = $(e);
+				
+				td.html('<div data="strAssunto" style="width:190px; overflow: hidden">' + td.text() + '</div>');
+				
+			});
 
 			//Retira Ultima Coluna
 			$('#example').find('tr').each(function(i, e) {
@@ -285,6 +299,8 @@ $(function () {
 			acertaCorBotoes();
 			carregaComboStatus();
 			carregaComboCategoria();
+			carregaComboCategoriaCurso();
+			carregaComboPersonagem();
         }
 	
 	ticketService.getTickets(success);
@@ -312,6 +328,13 @@ function acertaCorBotoes() {
 
 }
 
+function carregaComboPersonagem() {
+	var combo = $('#profissional');	
+	ticketService.getProfissionais(function(dado) {
+		carregaCombo(combo, $.parseJSON(dado), 'codPersonagem', 'strPersonagem')
+	});
+}
+
 function carregaComboStatus() {
 	var combo = $('#status');	
 	ticketService.getStatus(function(dado) {
@@ -326,6 +349,39 @@ function carregaComboCategoria() {
 	});
 }
 
+
+function carregaComboCategoriaCurso() {
+	var comboCategoria = $('#categoriacurso');	
+	ticketService.getCategoriasCursos(function(dado) {
+		carregaCombo(comboCategoria, $.parseJSON(dado), 'codCategoria', 'strCategoria')
+		
+		var comboCurso = $('#curso');
+		var comboTurma = $('#turma');
+		
+		var changeCurso = function() {
+			var codCurso = comboCurso.val();
+			comboTurma.html('');
+			ticketService.getTurmas(codCurso, function(dadoTurma) {
+				carregaCombo(comboTurma, $.parseJSON(dadoTurma), 'codTurma', 'strTurma')
+			});
+			
+		};
+		
+		var changeCategoria = function() {
+			var codCategoria = comboCategoria.val();
+			comboCurso.html('');
+			ticketService.getCursos(codCategoria, function(dadoCurso) {
+				carregaCombo(comboCurso, $.parseJSON(dadoCurso), 'codCurso', 'strCurso');
+				changeCurso();
+			});
+		};
+		
+		comboCategoria.change(changeCategoria);
+		changeCategoria();
+		
+		comboCurso.change(changeCurso);
+	});
+}
 
 function carregaCombo(combo, dado, codigo, valor, d) {
 	$(dado).each(function(i, e) {

@@ -111,3 +111,39 @@ ticketService.salvaCategoria = function(codTicket, codCategoria) {
         data: "codTicket="+codTicket+"&codCategoria="+codCategoria
     })
 }
+
+ticketService.getCategoriasCursos = function(success) {
+    $.ajax({            //Função AJAX
+        url: configuracoes.baseURL + "entities/CategoriaCurso.asp",          //Arquivo asp
+        type: "get",                //Método de envio
+        data: "codUsuario=" + session.get("codUsuario"),   //Dados
+        success: success,
+    })
+}
+
+ticketService.getCursos = function(codCategoria, success) {
+    $.ajax({            //Função AJAX
+        url: configuracoes.baseURL + "entities/Curso.asp",          //Arquivo asp
+        type: "get",                //Método de envio
+        data: "codCategoria=" + codCategoria + "&codUsuario=" + session.get("codUsuario"),   //Dados,   //Dados
+        success: success,
+    })
+}
+
+ticketService.getTurmas = function(codCurso, success) {
+    $.ajax({            //Função AJAX
+        url: configuracoes.baseURL + "entities/Turma.asp",          //Arquivo asp
+        type: "get",                //Método de envio
+        data: "codCurso=" + codCurso + "&codUsuario=" + session.get("codUsuario"),   //Dados
+        success: success,
+    })
+}
+
+ticketService.getProfissionais = function(success) {
+    $.ajax({            //Função AJAX
+        url: configuracoes.baseURL + "entities/Personagem.asp",          //Arquivo asp
+        type: "get",                //Método de envio
+        data: "codUsuario=" + session.get("codUsuario"),   //Dados
+        success: success,
+    })
+}

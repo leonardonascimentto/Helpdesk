@@ -1,8 +1,8 @@
 $(document).ready(function () {
     $('#errologin').hide();  //Esconde o elemento com id erro
     $('#form').submit(function () { //Ao submeter formulário
-        var email = $('#email').val();  //Pega valor do campo email
-        var password = $('#password').val();    //Pega valor do campo senha
+        var email = $('#emailLogin').val();  //Pega valor do campo email
+        var password = $('#passwordLogin').val();    //Pega valor do campo senha
         $.ajax({            //Função AJAX
             url: configuracoes.baseURL + "entities/Login.asp",  //Arquivo asp
             type: "post",   //Método de envio

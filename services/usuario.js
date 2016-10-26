@@ -4,7 +4,7 @@
 		$.ajax({            //Função AJAX
             url: configuracoes.baseURL + "entities/UsuariosInserir.asp",          //Arquivo asp
             type:"get",                //Método de envio
-            data: "nome="+usuarioData.nome+"&email="+usuarioData.email+"&password="+usuarioData.password+"&codUsuario="+usuarioData.codUsuario+"&codPerfil="+usuarioData.codPerfil,   //Dados
+            data: "nome="+usuarioData.nome+"&email="+usuarioData.email+"&ra="+usuarioData.ra+"&cpf="+usuarioData.cpf+"&telefone="+usuarioData.telefone+"&celular="+usuarioData.celular+"&password="+usuarioData.password+"&codUsuario="+usuarioData.codUsuario+"&codPerfil="+usuarioData.codPerfil,   //Dados
             success: success,
 			error: error,
 			complete: function() {

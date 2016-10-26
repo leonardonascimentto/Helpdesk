@@ -8,7 +8,6 @@
     <title>Início | Quantum</title>
 
     <!-- Vendor CSS -->
-    <link href="vendors/bower_components/fullcalendar/dist/fullcalendar.min.css" rel="stylesheet">
     <link href="vendors/bower_components/animate.css/animate.min.css" rel="stylesheet">
     <link href="vendors/bower_components/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
     <link href="vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css" rel="stylesheet">
@@ -49,11 +48,11 @@
                             <li class="hidden-xs">
                                 <a data-ma-action="fullscreen" href="#"><i class="zmdi zmdi-fullscreen"></i> Fullscreen</a>
                             </li>
-                            <!--<li>
-                                <a data-ma-action="clear-localstorage" href="#"><i class="zmdi zmdi-delete"></i> Limpar cache</a>
-                            </li>-->
                             <li>
-                                <a href="javascript:void(0);" onclick="signout()" alt="Sair"><i class="zmdi zmdi-time-restore"></i> Sair</a>
+                                <a data-ma-action="clear-localstorage" href="#"><i class="zmdi zmdi-delete"></i> Remover cache</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" onClick="window.location.reload()" alt="Atualizar"><i class="zmdi zmdi-refresh"></i> Atualizar</a>
                             </li>
                         </ul>
                     </li>
@@ -83,26 +82,18 @@
                     </div>
                 </a>
 
-                <!--<ul class="main-menu">
+                <ul class="main-menu">
                     <li>
-                        <a href="profile-about.html"><i class="zmdi zmdi-account"></i> Meu Perfil</a>
+                        <a href="perfil.html"><i class="zmdi zmdi-account"></i> Meu Perfil</a>
                     </li>
-                </ul>-->
+                    <li>
+                        <a href="javascript:void(0);" onclick="signout()" alt="Sair"><i class="zmdi zmdi-time-restore"></i> Sair</a>
+                    </li>
+                </ul>
             </div>
 
-            <ul class="main-menu" id="ulMenu">
-                <li class="toggled active"><a href="home.html"><i class="zmdi zmdi-home"></i> Início</a></li>
-                <li><a href="tickets.html"><i class="zmdi zmdi-view-list"></i> Tickets</a></li>
-                <li class="sub-menu">
-                    <a href="#" data-ma-action="submenu-toggle"><i class="zmdi zmdi-settings"></i> Administrativo</a>
-                    <ul>
-                        <li><a href="usuarios.html">Usuários</a></li>
-                    </ul>
-                </li>
-            </ul>
+            <ul class="main-menu" id="ulMenu"></ul>
         </aside>
-
-        <aside id="chat" class="sidebar"></aside>
 
         <section id="content">
             <div class="container">
@@ -177,34 +168,28 @@
         </div>
     </div>
 
-    
+
     <!-- Javascript Libraries -->
     <script src="vendors/bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
-    <script src="vendors/bower_components/flot/jquery.flot.js"></script>
-    <script src="vendors/bower_components/flot/jquery.flot.resize.js"></script>
-    <script src="vendors/bower_components/flot.curvedlines/curvedLines.js"></script>
+    <script src="vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>    
     <script src="vendors/sparklines/jquery.sparkline.min.js"></script>
-    <script src="vendors/bower_components/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
-
-    <script src="vendors/bower_components/moment/min/moment.min.js"></script>
-    <script src="vendors/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
-    <script src="vendors/bower_components/simpleWeather/jquery.simpleWeather.min.js"></script>
+    <script src="vendors/bower_components/moment/min/moment.min.js"></script>    
+    
     <script src="vendors/bower_components/Waves/dist/waves.min.js"></script>
     <script src="vendors/bootstrap-growl/bootstrap-growl.min.js"></script>
     <script src="vendors/bower_components/sweetalert2/dist/sweetalert2.min.js"></script>
     <script src="vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
 
     <script src="js/app.min.js"></script>
+    <script src="js/index.js"></script>
 
     <script src="scripts/config.js"></script>
     <script src="scripts/jquery.cookie.js"></script>
     <script src="scripts/home.js"></script>
     <script src="scripts/util.js"></script>
-	<script src="scripts/LINQ_JS_MIN.js"></script>
+    <script src="scripts/LINQ_JS_MIN.js"></script>
     <script src="services/ticket.js"></script>
-	<script src="services/menu.js"></script>
+    <script src="services/menu.js"></script>
 </body>
 
 </html>
