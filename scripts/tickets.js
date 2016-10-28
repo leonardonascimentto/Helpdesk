@@ -3,6 +3,7 @@ function inserirTicket() {
     var assunto = $('#assunto').val();  //Pega valor do campo assunto
     var descricao = $('#descricao').val();  //Pega valor do campo descricao
     var codUsuario = session.get("codUsuario");  //Pega valor do codUsuario
+	var strCategoria = $('#categoria option:selected').html();
 	
 	var nome = nomeUsuarioSelecionado;
 	if (nome == '')
@@ -10,7 +11,19 @@ function inserirTicket() {
 		nome = session.get("nomeUsuario");
 	}
 	
-    var ticketData = { categoria: categoria, assunto: assunto, descricao: descricao, codUsuarioCriador: codUsuario, codUsuario: codUsuarioSelecionadoInclusao, nome: nome};
+    var ticketData = 
+		{ 	categoria: categoria, 
+			assunto: assunto, 
+			descricao: descricao, 
+			codUsuarioCriador: codUsuario, 
+			codUsuario: codUsuarioSelecionadoInclusao, 
+			nome: nome,
+			codTurma: $('#turma').val(),
+			codPersonagem: $('#profissional').val(),
+			codCategoria: $('#categoriacurso').val(),
+			codCurso: $('#curso').val(),
+			strCategoria: strCategoria
+		};
     var success = function (result) {         //Sucesso no AJAX
         if (result != '0') {
             $('.modal:visible').modal('hide');
@@ -27,8 +40,6 @@ function inserirTicket() {
 
 			codUsuarioSelecionadoInclusao = 0;
 			nomeUsuarioSelecionado = "";
-
-			
         } else {
             alert('Erro ao incluir dados');
         }
@@ -86,7 +97,7 @@ function inserirTabela(u) {
 		0: '<span class="codTicket">'+ u.codTicket +'</span>',
 		1: '<span class="strAssunto">' + u.assunto + '</span>',
 		2: '<span class="strNome">' + u.nome + '</span>',
-		3: '<span class="strCategoria">' + u.categoria + '</span>',
+		3: '<span class="strCategoria">' + u.strCategoria + '</span>',
 		4: '<span class="strStatus label label-success">Aberto</span>',
 		5: '<span class="dtDataHora">' + dataBr() + '</span>'
 	}]).draw();
@@ -101,6 +112,31 @@ function inserirTabela(u) {
 	$('#example').find('tbody').find('tr:first').find('td:eq(1)').click(abreModal).css('cursor', 'pointer');
 	acertaCorBotoes();
 	
+}
+
+function alteraDetalhe(td) {
+    if (td != undefined) {
+        trEdicao = $(td).parent();
+    }
+
+    var exec = function () {
+        var achou = false;
+        trEdicao.find('td').each(function (i, e) {
+            var td = $(e);
+            trEdicao.next().find('li[data-dtr-index=' + i + ']').html(td.html());
+
+            if (!achou) {
+                achou = trEdicao.next().find('li[data-dtr-index=' + i + ']').length > 0
+            }
+        });
+
+        if (!achou) {
+            setTimeout(exec, 100);
+        }
+    }
+
+    setTimeout(exec, 100);
+
 }
 
 function adicionaDescricao(tr, texto) {
@@ -132,7 +168,7 @@ function carregaComentarios(ID, tr) {
 				$('#ulComentarios').append(li);				
 			});
 		} else {
-			var li = '<li class="semcomentario"><p><span>Ainda não existem comentários</span></p></li>';
+			var li = '<li class="semcomentario"><div class="alert alert-info alert-dismissable">Ainda não existem comentários</div></li>';
 			$('#ulComentarios').append(li);			
 		}
 		
@@ -163,6 +199,11 @@ function abreModal() {
 	$('#status').val(objTicket.codStatus);
 	$('#categoriaModal').val(objTicket.codCategoria);
 	
+	$('#categoriacurso').val(objTicket.codCategoriaCurso);
+	$('#curso').val(objTicket.codCurso);
+	$('#turma').val(objTicket.codTurma);
+	$('#profissional').val(objTicket.codPersonagem);
+	
 	$("#formModalAcompanhamento").modal();
 	
 	carregaComentarios(ID, tr);	
@@ -171,9 +212,9 @@ function abreModal() {
 var codUsuarioSelecionadoInclusao = 0;
 var nomeUsuarioSelecionado = "";
 
-function carregaUsuariosParaAutoComplete() {
+function carregaUsuariosParaAutoComplete(codTurma) {
 	
-	usuarioService.getAll(function(data) {
+	usuarioService.getByTurma(codTurma, function(data) {
 		var usuarios = [];
 		var codigos = [];
 		var jdata = $.parseJSON(data);
@@ -300,13 +341,9 @@ $(function () {
 			carregaComboStatus();
 			carregaComboCategoria();
 			carregaComboCategoriaCurso();
-			carregaComboPersonagem();
         }
 	
 	ticketService.getTickets(success);
-	
-	carregaUsuariosParaAutoComplete();
-   
 });
 
 function acertaCorBotoes() {
@@ -328,9 +365,10 @@ function acertaCorBotoes() {
 
 }
 
-function carregaComboPersonagem() {
+function carregaComboPersonagem(codTurma) {
 	var combo = $('#profissional');	
-	ticketService.getProfissionais(function(dado) {
+	combo.html('');
+	ticketService.getProfissionais(codTurma, function(dado) {
 		carregaCombo(combo, $.parseJSON(dado), 'codPersonagem', 'strPersonagem')
 	});
 }
@@ -361,10 +399,20 @@ function carregaComboCategoriaCurso() {
 		var changeCurso = function() {
 			var codCurso = comboCurso.val();
 			comboTurma.html('');
+
+			var changeTurma = function() {
+				var codTurma = comboTurma.val();
+				carregaComboPersonagem(codTurma);
+				carregaUsuariosParaAutoComplete(codTurma);
+			}
+
+
 			ticketService.getTurmas(codCurso, function(dadoTurma) {
 				carregaCombo(comboTurma, $.parseJSON(dadoTurma), 'codTurma', 'strTurma')
+				changeTurma();			
 			});
 			
+			comboTurma.change(changeTurma);
 		};
 		
 		var changeCategoria = function() {
