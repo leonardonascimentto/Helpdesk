@@ -5,7 +5,11 @@ ticketService.insert = function (ticketData, success) {
         url: configuracoes.baseURL + "entities/TicketsInserir.asp",          //Arquivo asp
         type: "get",                //Método de envio
         data: "categoria=" + ticketData.categoria + "&assunto=" + ticketData.assunto + "&descricao=" 
-		+ ticketData.descricao + "&codUsuarioCriador=" + ticketData.codUsuarioCriador + "&codUsuario=" + ticketData.codUsuario,   //Dados
+		+ ticketData.descricao + "&codUsuarioCriador=" + ticketData.codUsuarioCriador 
+		+ "&codUsuario=" + ticketData.codUsuario + "&codTurma=" + ticketData.codTurma 
+		+ "&codPersonagem=" + ticketData.codPersonagem 
+		+ "&codCategoria=" + ticketData.codCategoria
+		+ "&codCurso=" + ticketData.codCurso,   //Dados
         success: success,
         complete: function () {
             $('#loader').hide();
@@ -139,11 +143,11 @@ ticketService.getTurmas = function(codCurso, success) {
     })
 }
 
-ticketService.getProfissionais = function(success) {
+ticketService.getProfissionais = function(codTurma, success) {
     $.ajax({            //Função AJAX
         url: configuracoes.baseURL + "entities/Personagem.asp",          //Arquivo asp
         type: "get",                //Método de envio
-        data: "codUsuario=" + session.get("codUsuario"),   //Dados
+        data: "codUsuario=" + session.get("codUsuario") + "&codTurma=" + codTurma,   //Dados
         success: success,
     })
 }
