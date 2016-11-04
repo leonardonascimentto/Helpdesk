@@ -169,3 +169,29 @@ function getItemPai(label, icon) {
 
    return li;
 }
+
+function alteraDetalhe(td) {
+	if (td!=undefined)
+	{
+		trEdicao = $(td).parent();
+	}
+	
+	var exec = function() {		
+		var achou = false;
+		trEdicao.find('td').each(function (i, e) {
+			var td = $(e);
+			trEdicao.next().find('li[data-dtr-index=' + i + ']').find('.dtr-data').html(td.html());
+			
+			if (!achou)
+			{
+				achou = trEdicao.next().find('li[data-dtr-index=' + i + ']').length > 0
+			}
+		});	
+		
+		if (!achou) {
+			setTimeout(exec, 100);
+		}
+	}
+	
+	setTimeout(exec, 100);	
+}

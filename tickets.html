@@ -5,14 +5,18 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="/favicon.ico" type="image/x-icon">
     <title>Tickets | Quantum</title>
 
     <!-- Vendor CSS -->
+	<link href="vendors/bower_components/animate.css/animate.min.css" rel="stylesheet">
+    <link href="vendors/bower_components/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
     <link href="vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css" rel="stylesheet">
     <link href="vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet">
     <link href="vendors/bower_components/datatables.net-dt/css/jquery.dataTables.min.css" rel="stylesheet">
-    <link href="vendors/bower_components/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet">
-    <link href="https://cdn.datatables.net/responsive/2.1.0/css/responsive.dataTables.min.css" rel="stylesheet">
+	<link href="https://cdn.datatables.net/responsive/2.1.0/css/responsive.dataTables.min.css" rel="stylesheet">
+    <link href="vendors/bower_components/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet">    
 
     <!-- CSS -->
     <link href="css/app_1.min.css" rel="stylesheet">
@@ -101,9 +105,9 @@
                 </a>
 
                 <ul class="main-menu">
-                    <li>
+                    <!--<li>
                         <a href="perfil.html"><i class="zmdi zmdi-account"></i> Meu Perfil</a>
-                    </li>
+                    </li>-->
                     <li>
                         <a href="javascript:void(0);" onclick="signout()" alt="Sair"><i class="zmdi zmdi-time-restore"></i> Sair</a>
                     </li>
@@ -172,9 +176,10 @@
     <script src="vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="vendors/bower_components/Waves/dist/waves.min.js"></script>
     <script src="vendors/bootstrap-growl/bootstrap-growl.min.js"></script>
-    <script src="vendors/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="vendors/bower_components/bootstrap-select/dist/js/bootstrap-select.js"></script>
+	<script src="vendors/bower_components/sweetalert2/dist/sweetalert2.min.js"></script>
+    <script src="vendors/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>    
     <script src="https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js"></script>
+	<script src="vendors/bower_components/bootstrap-select/dist/js/bootstrap-select.js"></script>
 
     <script src="js/app.min.js"></script>
 
@@ -251,10 +256,9 @@
                                     <div class="select">
                                         <select id="categoria" name="categoria" class="form-control selectpicker" data-live-search="true">
                                             <option value="1">Administrativo</option>
-                                            <option value="2">Coordenação</option>
-                                            <option value="3">Financeiro</option>
-                                            <option value="4">Secretaria</option>
-                                            <option value="5">Outros</option>
+                                            <option value="2">Financeiro</option>
+                                            <option value="3">Pedagógico</option>
+                                            <option value="4">Outros</option>
                                         </select>
                                     </div>
                                 </div>
@@ -328,7 +332,7 @@
                                         <div class="col-sm-10">
                                             <div class="fg-line">
                                                 <div class="select">
-                                                    <select id="status" name="status" class="form-control selectpicker" data-live-search="true" onchange="salvaStatus(this)"></select>
+                                                    <select id="status" name="status" class="form-control " onchange="salvaStatus(this)"></select>
                                                 </div>
                                             </div>
                                         </div>

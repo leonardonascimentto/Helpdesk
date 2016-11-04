@@ -190,39 +190,13 @@ function inserirTabela(u) {
 	
 	tr.find('td').eq(0).attr('data', 'codUsuario');
 	tr.find('td').eq(1).attr('data', 'strNome').html(acertaNome);
-	tr.find('td').eq(2).attr('data', 'strEmail');
-	tr.find('td').eq(3).attr('data', 'strCpf');
-	tr.find('td').eq(4).attr('data', 'strPerfil');
-	tr.find('td').eq(5).attr('data', 'strTel1');
-	tr.find('td').eq(6).attr('data', 'strTel2');
+	tr.find('td').eq(2).attr('data', 'strMatricula');
+	tr.find('td').eq(3).attr('data', 'strEmail');
+	tr.find('td').eq(4).attr('data', 'strCpf');
+	tr.find('td').eq(5).attr('data', 'strPerfil');
+	tr.find('td').eq(6).attr('data', 'strTel1');
+	tr.find('td').eq(7).attr('data', 'strTel2');
 	
-	
-}
-
-function alteraDetalhe(td) {
-	if (td!=undefined)
-	{
-		trEdicao = $(td).parent();
-	}
-	
-	var exec = function() {		
-		var achou = false;
-		trEdicao.find('td').each(function (i, e) {
-			var td = $(e);
-			trEdicao.next().find('li[data-dtr-index=' + i + ']').html(td.html());
-			
-			if (!achou)
-			{
-				achou = trEdicao.next().find('li[data-dtr-index=' + i + ']').length > 0
-			}
-		});	
-		
-		if (!achou) {
-			setTimeout(exec, 100);
-		}
-	}
-	
-	setTimeout(exec, 100);
 	
 }
 

@@ -75,3 +75,14 @@
         })
 		
 	}
+	usuarioService.getByTurma = function(codTurma, success, error) {
+		
+		$.ajax({
+            url:configuracoes.baseURL + "entities/Usuarios.asp",
+            type:"get", 
+            data: "codTurma="+codTurma,
+            success: success,
+			error: error
+        })
+		
+	}
