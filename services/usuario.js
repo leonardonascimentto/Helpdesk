@@ -64,16 +64,23 @@
         })
 		
 	};
-	usuarioService.getAll = function(success, error) {
-		
+	usuarioService.getAll = function(success, error) {		
 		$.ajax({
             url:configuracoes.baseURL + "entities/Usuarios.asp",
             type:"get", 
             data: "",
             success: success,
 			error: error
-        })
-		
+        });
+	}
+	usuarioService.get = function(codUsuario, success, error) {		
+		$.ajax({
+            url:configuracoes.baseURL + "entities/Usuarios.asp",
+            type:"get", 
+            data: "codUsuario="+codUsuario,
+            success: success,
+			error: error
+        });
 	}
 	usuarioService.getByTurma = function(codTurma, success, error) {
 		
