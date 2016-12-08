@@ -245,7 +245,7 @@ function resetTable() {
                 "language": {
                     "url": "http://cdn.datatables.net/plug-ins/1.10.11/i18n/Portuguese-Brasil.json"
                 },
-                "pageLength": 25,
+                "pageLength": 50,
                 "columns": [
                     { "orderable": true },
                     { "orderable": true },
@@ -410,7 +410,7 @@ function carregaComboCategoriaCurso() {
 				carregaCombo(comboTurma, $.parseJSON(dadoTurma), 'codTurma', 'strTurma')
 				changeTurma();			
 			});
-			
+			comboTurma.unbind('change');			
 			comboTurma.change(changeTurma);
 		};
 		
@@ -422,10 +422,11 @@ function carregaComboCategoriaCurso() {
 				changeCurso();
 			});
 		};
-		
+		comboCategoria.unbind('change');
 		comboCategoria.change(changeCategoria);
 		changeCategoria();
 		
+		comboCurso.unbind('change');
 		comboCurso.change(changeCurso);
 	});
 }

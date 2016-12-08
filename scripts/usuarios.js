@@ -16,6 +16,7 @@ function editarUsuario(link) {
         var cpf = registro.strCpf;
         var telefone = registro.strTel1;
         var celular = registro.strTel2;
+		var codStatusMatricula = registro.codStatusMatricula;
 
         $('#nomeEdicao').val(nome);
         $('#emailEdicao').val(email);
@@ -25,7 +26,9 @@ function editarUsuario(link) {
         $('#celularEdicao').val(celular);
         $('#codUsuarioEdicao').val(codUsuario);
         $('#perfilEdicao').val(codPerfil);
+		$('#statusEdicao').val(codStatusMatricula);
 
+		
         $('#formModalEdicao').modal('show');
     }
 }
@@ -39,8 +42,9 @@ function salvarUsuario() {
     var celular = $('#celularEdicao').val();  //Pega valor do campo celular
     var codUsuario = $('#codUsuarioEdicao').val();
     var codPerfil = $('#perfilEdicao').val();
-
-    var usuarioData = { nome: nome, email: email, ra: ra, cpf: cpf, telefone: telefone, celular: celular, codUsuario: codUsuario, codPerfil: codPerfil };
+	var codStatusMatricula =$('#statusEdicao').val();
+	
+    var usuarioData = { nome: nome, email: email, ra: ra, cpf: cpf, telefone: telefone, celular: celular, codUsuario: codUsuario, codPerfil: codPerfil, codStatusMatricula: codStatusMatricula };
     var success = function (result) {         //Sucesso no AJAX
         if (result != '0') {
             $('.modal:visible').modal('hide');
@@ -58,8 +62,18 @@ function salvarUsuario() {
             usuarioData.codUsuario = result;
             alterarTabela(usuarioData);
 
-            cacheUsuarios.where(function (u) { return u.codUsuario == codUsuario; })[0].codPerfil = codPerfil;
-        } else {
+            var registro = cacheUsuarios.where(function (u) { return u.codUsuario == codUsuario; })[0]
+			registro.codPerfil = codPerfil;
+        		
+			registro.strNome = nome;
+			registro.strEmail = email;
+			registro.strMatricula = ra;
+			registro.strCpf = cpf;
+			registro.strTel1 = telefone;
+			registro.strTel2 = celular;
+			registro.codStatusMatricula = codStatusMatricula;
+		
+		} else {
             alert('Erro ao incluir dados');
         }
     };
@@ -284,6 +298,33 @@ function ativaValidacao() {
 
 }
 
+
+var statusmatricula = [];
+function carregaStatusMatricula() {
+    usuarioService.getStatusMatricula(function (data) {
+
+        statusmatricula = $.parseJSON(data);
+
+        montaComboStatusMatricula();
+
+    }, function () { });
+
+}
+
+function montaComboStatusMatricula() {
+
+    var combo = $('#statusEdicao');
+
+    $(statusmatricula).each(function (i, e) {
+
+        var option = $('<option>').val(e.codStatusMatricula).text(e.strStatusMatricula);
+        combo.append(option);
+
+    });
+
+}
+
+
 var perfis = [];
 function carregaPerfis() {
     usuarioService.getPerfis(function (data) {
@@ -315,8 +356,14 @@ $(function () {
     carregaDadosUsuario();
     ativaValidacao();
     carregaPerfis();
+	carregaStatusMatricula();
 
-    $('#loader').show();
+    
+	var mytime = setInterval(function() { 
+	
+		$('#loader2').show(); 
+	
+	}, 100); 
     $.ajax({            //Função AJAX
         url: configuracoes.baseURL + "entities/usuarios.asp",          //Arquivo asp
         type: "post",                //Método de envio
@@ -358,7 +405,7 @@ $(function () {
                 language: {
                     "url": "http://cdn.datatables.net/plug-ins/1.10.11/i18n/Portuguese-Brasil.json"
                 },
-                pageLength: 25,
+                pageLength: 50,
                 columns: [
 					{ "orderable": true },
 					{ "orderable": true },
@@ -372,7 +419,7 @@ $(function () {
                 ],
                 order: [[1, "asc"]],
                 //colReorder: true,
-                //rowReorder: true,
+                rowReorder: true,
                 select: {
                     style: 'os'
                 },
@@ -385,11 +432,15 @@ $(function () {
                 //buttons: ['print', 'excel', 'pdf']
 
             });
+			
+			clearInterval(mytime);
+			$('#loader2').hide();
+			$('#example').show();
 
         },
 
         complete: function () {
-            $('#loader').hide();
+            
         }
     })
 });

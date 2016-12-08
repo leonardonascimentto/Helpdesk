@@ -56,6 +56,7 @@ function carregaDadosUsuario() {
         carrega({ strNome: nomeUsuario, strPerfil: perfilUsuario });
     }
     else
+		
         $.ajax({            //Função AJAX
             url: configuracoes.baseURL + "entities/usuarios.asp",          //Arquivo asp
             type: "post",                //Método de envio
@@ -67,6 +68,7 @@ function carregaDadosUsuario() {
                 session.set("perfilUsuario", u.strPerfil);
 
                 carrega(u);
+				
             }
         })
 }
