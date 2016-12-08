@@ -18,6 +18,14 @@
     <!-- CSS -->
     <link href="css/app_1.min.css" rel="stylesheet">
     <link href="css/app_2.min.css" rel="stylesheet">
+	
+	<style>
+        .error {
+            font-size: 12px;
+            color: red;
+        }
+    </style>
+	
 </head>
 
 <body>
@@ -171,72 +179,73 @@
                                         <dd data-field="strSenha"></dd>
                                     </dl>
                                 </div>
+								<form id="formEdicao" name="formEdicao" class="form-horizontal" role="form">
+									<div class="pmbb-edit">
+										<dl class="dl-horizontal">
+											<dt class="p-t-10">Nome</dt>
+											<dd>
+												<div class="fg-line">
+													<input data-field="codUsuario" data-name="codUsuario" type="hidden" class="campo">
+													<input data-field="strNome" data-name="nome" type="text" class="form-control campo" id="strNome" name="strNome" >
+												</div>
 
-                                <div class="pmbb-edit">
-                                    <dl class="dl-horizontal">
-                                        <dt class="p-t-10">Nome</dt>
-                                        <dd>
-                                            <div class="fg-line">
-                                                <input data-field="codUsuario" data-name="codUsuario" type="hidden" class="campo">
-                                                <input data-field="strNome" data-name="nome" type="text" class="form-control campo">
-                                            </div>
+											</dd>
+										</dl>
+										<dl class="dl-horizontal">
+											<dt class="p-t-10">Email</dt>
+											<dd>
+												<div class="fg-line">
+													<input data-field="strEmail" data-name="email" type="email" class="form-control campo" id="strEmail" name="strEmail" >
+												</div>
+											</dd>
+										</dl>
+										<dl class="dl-horizontal">
+											<dt class="p-t-10">Ra</dt>
+											<dd>
+												<div class="fg-line">
+													<input data-field="strMatricula" data-name="ra" type="text" class="form-control campo" id="strMatricula" name="strMatricula" >
+												</div>
+											</dd>
+										</dl>
+										<dl class="dl-horizontal">
+											<dt class="p-t-10">Cpf</dt>
+											<dd>
+												<div class="fg-line">
+													<input data-field="strCpf" data-name="cpf" type="text" class="form-control campo" id="strCpf" name="strCpf" >
+												</div>
+											</dd>
+										</dl>
+										<dl class="dl-horizontal">
+											<dt class="p-t-10">Telefone</dt>
+											<dd>
+												<div class="fg-line">
+													<input data-field="strTel1" data-name="telefone" type="text" class="form-control campo" id="strTel1" name="strTel1" >
+												</div>
+											</dd>
+										</dl>
+										<dl class="dl-horizontal">
+											<dt class="p-t-10">Celular</dt>
+											<dd>
+												<div class="fg-line">
+													<input data-field="strTel2" data-name="celular" type="text" class="form-control campo" id="strTel2" name="strTel2" >
+												</div>
+											</dd>
+										</dl>
+										<dl class="dl-horizontal">
+											<dt class="p-t-10">Senha</dt>
+											<dd>
+												<div class="fg-line">
+													<input data-field="strSenha" data-name="password" type="text" class="form-control campo" id="strSenha" name="strSenha" >
+												</div>
+											</dd>
+										</dl>
 
-                                        </dd>
-                                    </dl>
-                                    <dl class="dl-horizontal">
-                                        <dt class="p-t-10">Email</dt>
-                                        <dd>
-                                            <div class="fg-line">
-                                                <input data-field="strEmail" data-name="email" type="email" class="form-control campo">
-                                            </div>
-                                        </dd>
-                                    </dl>
-                                    <dl class="dl-horizontal">
-                                        <dt class="p-t-10">Ra</dt>
-                                        <dd>
-                                            <div class="fg-line">
-                                                <input data-field="strMatricula" data-name="ra" type="text" class="form-control campo">
-                                            </div>
-                                        </dd>
-                                    </dl>
-                                    <dl class="dl-horizontal">
-                                        <dt class="p-t-10">Cpf</dt>
-                                        <dd>
-                                            <div class="fg-line">
-                                                <input data-field="strCpf" data-name="cpf" type="text" class="form-control campo">
-                                            </div>
-                                        </dd>
-                                    </dl>
-                                    <dl class="dl-horizontal">
-                                        <dt class="p-t-10">Telefone</dt>
-                                        <dd>
-                                            <div class="fg-line">
-                                                <input data-field="strTel1" data-name="telefone" type="text" class="form-control campo">
-                                            </div>
-                                        </dd>
-                                    </dl>
-                                    <dl class="dl-horizontal">
-                                        <dt class="p-t-10">Celular</dt>
-                                        <dd>
-                                            <div class="fg-line">
-                                                <input data-field="strTel2" data-name="celular" type="text" class="form-control campo">
-                                            </div>
-                                        </dd>
-                                    </dl>
-                                    <dl class="dl-horizontal">
-                                        <dt class="p-t-10">Senha</dt>
-                                        <dd>
-                                            <div class="fg-line">
-                                                <input data-field="strSenha" data-name="password" type="password" class="form-control campo">
-                                            </div>
-                                        </dd>
-                                    </dl>
-
-                                    <div class="m-t-30">
-                                        <button class="btn bgm-teal" onclick="salvar()">Salvar</button>
-                                        <button class="btn btn-default" onclick="visualizar()">Cancelar</button>
-                                    </div>
-                                </div>
+										<div class="m-t-30">
+											<button class="btn bgm-teal" onclick="salvar()">Salvar</button>
+											<button class="btn btn-default" onclick="visualizar()">Cancelar</button>
+										</div>
+									</div>
+								</form>
                             </div>
                         </div>
 
@@ -248,7 +257,7 @@
     </section>
 
     <footer id="footer">
-        Copyright &copy; 2016 Quantum
+        Copyright &copy; 2016 QuantumApp
     </footer>
 
     <!-- Page Loader -->

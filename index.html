@@ -30,9 +30,13 @@
         <!-- Login -->
         <div class="lc-block toggled" id="l-login">
 
+			<div class="p-0 p-b-15">
+                <img src="img/logo_part1.png">
+            </div>
+		
             <div id="errologin" class="alert alert-danger alert-dismissable">
                 <strong>Atenção!</strong><br /> Email ou senha inválidos.
-            </div>
+            </div>            
 
             <form id="form" name="form" role="form">
                 <div class="lcb-form">
@@ -59,7 +63,7 @@
                 </div>
             </form>
             <div class="lcb-navigation">
-                <!--<a href="#" data-ma-action="login-switch" data-ma-block="#l-register"><i class="zmdi zmdi-plus"></i> <span>Cadastrar</span></a>-->
+                <!-- <a href="#" data-ma-action="login-switch" data-ma-block="#l-register"><i class="zmdi zmdi-plus"></i> <span>Cadastrar</span></a> -->
                 <a href="#" data-ma-action="login-switch" data-ma-block="#l-forget-password"><i>?</i> <span>Esqueci a Senha</span></a>
             </div>
 
@@ -67,7 +71,11 @@
 
         <!-- Register -->
         <div class="lc-block" id="l-register">
-
+			
+			<div class="p-0 p-b-15">
+                <img src="img/logo_part1.png">
+            </div>
+			
             <div id="errocadastro" class="alert alert-danger alert-dismissable">
                 <strong>Atenção!</strong><br />Preencha os dados corretamente.
             </div>
@@ -126,7 +134,7 @@
                 </div>
             </form>
             <div class="lcb-navigation">
-                <a href="#" data-ma-action="login-switch" data-ma-block="#l-login"><i class="zmdi zmdi-long-arrow-right"></i> <span>Entrar</span></a>
+                <a href="#" data-ma-action="login-switch" data-ma-block="#l-login"><i class="zmdi zmdi-long-arrow-left"></i> <span>Entrar</span></a>
                 <a href="#" data-ma-action="login-switch" data-ma-block="#l-forget-password"><i>?</i> <span>Esqueci a Senha</span></a>
             </div>
         </div>
@@ -134,6 +142,10 @@
         <!-- Forgot Password -->
         <div class="lc-block" id="l-forget-password">
 
+			<div class="p-0 p-b-15">
+                <img src="img/logo_part1.png">
+            </div>
+		
             <div id="sucessoesqueci" class="alert alert-success" role="alert" style="display: none">
                 Sua senha foi enviada para o email informado.
             </div>
@@ -154,8 +166,8 @@
                     <button type="button" onclick="enviarEmail(); return false;" class="btn btn-login btn-success btn-float"><i class="zmdi zmdi-mail-send"></i></button>
                 </div>
                 <div class="lcb-navigation">
-                    <a href="#" data-ma-action="login-switch" data-ma-block="#l-login"><i class="zmdi zmdi-long-arrow-right"></i> <span>Entrar</span></a>
-                    <a href="#" data-ma-action="login-switch" data-ma-block="#l-register"><i class="zmdi zmdi-plus"></i> <span>Cadastrar</span></a>
+                    <a href="#" data-ma-action="login-switch" data-ma-block="#l-login"><i class="zmdi zmdi-long-arrow-left"></i> <span>Entrar</span></a>
+                    <!-- <a href="#" data-ma-action="login-switch" data-ma-block="#l-register"><i class="zmdi zmdi-plus"></i> <span>Cadastrar</span></a> -->
                 </div>
             </form>
         </div>
