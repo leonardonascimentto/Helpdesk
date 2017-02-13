@@ -173,20 +173,9 @@ function inserirUsuario() {
 }
 
 function inserirTabela(u) {
-    /*
-    var tr = $('<tr>');
-    $('<td>').addClass('field').attr('data', 'codUsuario').text(u.codUsuario).appendTo(tr);
-    $('<td>').addClass('field').attr('data', 'strNome').text(u.nome).appendTo(tr);
-    $('<td>').addClass('field').attr('data', 'strLogin').text(u.email).appendTo(tr);
-    $('<td>').addClass('field').attr('data', 'strPerfil').text(u.Perfil).appendTo(tr);
-    $('<td>').css('textAlign', 'center').html(u.linkEditar).appendTo(tr);
-    $('<td>').css('textAlign', 'center').html(u.linkExcluir).appendTo(tr);
-
-    $('#example tbody').prepend(tr);
-    */
-
     var table = $('#example').DataTable();
-    var linha = table.rows.add([{
+    
+	var linha = table.rows.add([{
         0: u.codUsuario,
         1: u.nome,
         2: u.ra,
@@ -194,22 +183,28 @@ function inserirTabela(u) {
         4: u.cpf,
         5: u.Perfil,
         6: u.telefone,
-        7: u.celular,
-        8: u.linkEditar
+        7: u.celular ,
+        8: '' //u.linkEditar
     }]).draw();
 
+	
 	var tr = $(linha.nodes()[0]);
+	tr.addClass("repeat")
 	
 	var acertaNome = '<div data="strNome" style="width:160px; overflow: hidden">' + u.nome + '</div>'
 	
-	tr.find('td').eq(0).attr('data', 'codUsuario');
-	tr.find('td').eq(1).attr('data', 'strNome').html(acertaNome);
-	tr.find('td').eq(2).attr('data', 'strMatricula');
-	tr.find('td').eq(3).attr('data', 'strEmail');
-	tr.find('td').eq(4).attr('data', 'strCpf');
-	tr.find('td').eq(5).attr('data', 'strPerfil');
-	tr.find('td').eq(6).attr('data', 'strTel1');
-	tr.find('td').eq(7).attr('data', 'strTel2');
+	var acertaEmail = '<div data="strNome" style="width:160px; overflow: hidden">' + u.email + '</div>'
+	
+	tr.find('td').eq(0).attr('data', 'codUsuario').addClass("field");
+	tr.find('td').eq(1).attr('data', 'strNome').html(acertaNome).addClass("field");
+	tr.find('td').eq(2).attr('data', 'strMatricula').addClass("field");
+	tr.find('td').eq(3).attr('data', 'strEmail').html(acertaEmail).addClass("field");
+	tr.find('td').eq(4).attr('data', 'strCpf').addClass("field");
+	tr.find('td').eq(5).attr('data', 'strPerfil').addClass("field");
+	tr.find('td').eq(6).attr('data', 'strTel1').addClass("field");
+	tr.find('td').eq(7).attr('data', 'strTel2').addClass("field");
+	tr.find('td').eq(8).html($('div.pull-right').eq(0).parent().clone().html());
+	
 	
 	
 }
@@ -225,6 +220,11 @@ function alterarTabela(u) {
     if (u.codPerfil > 0) {
         strPerfil = perfis.where(function (p) { return p.codPerfil == u.codPerfil; })[0].strPerfil;
         trEdicao.find('td[data=strPerfil]').text(strPerfil);
+    }
+	
+	if (u.codStatusMatricula > 0) {
+        strStatusMatricula = statusmatricula.where(function (s) { return s.codStatusMatricula == u.codStatusMatricula; })[0].strStatusMatricula;
+        trEdicao.find('td[data=strStatusMatricula]').text(strStatusMatricula);
     }
 
 	alteraDetalhe();    
@@ -350,24 +350,120 @@ function montaComboPerfis() {
 
 }
 
+var codUltimo = 0
+
+function carregaProximaPagina() {
+	$('.loaderPaginacaoInfinita').show();
+	
+	$.ajax({            //Função AJAX
+        url: configuracoes.baseURL + "entities/usuarios.asp",          //Arquivo asp
+        type: "get",                //Método de envio
+        data: "codUsuarioPaginacao="+codUltimo+"&filtroUsuario="+$('#filtroUsuario').val(),   //Dados
+        success: function(maisUsuarios) {
+			maisUsuarios = $.parseJSON(maisUsuarios);
+			
+			var quantidade = maisUsuarios.length
+			
+			cacheUsuarios = cacheUsuarios.concat(maisUsuarios);
+			
+			$(maisUsuarios).each(function(i,e) {
+				
+				codUltimo = e.strNome
+				
+				var usuarioData = { 
+									codUsuario : e.codUsuario,
+									nome: e.strNome, 
+									email: e.strEmail, 
+									ra: e.strMatricula, 
+									cpf: e.strCpf, 
+									telefone: e.strTel1, 
+									celular: e.strTel2, 
+									password: e.strSenha, 
+									codPerfil: 0,
+									Perfil: e.strPerfil,
+									strStatusMatricula: ''
+								};
+
+				inserirTabela(usuarioData);
+
+				
+			});
+			if (quantidade>0)
+				$(document).on('scroll', bodyScroll);
+			
+			$('.loaderPaginacaoInfinita').hide(); 
+			$('#example_wrapper').css('overflow', 'hidden')
+	
+		}
+	});
+	
+}
+
+function bodyScroll() {
+	
+	var scrollTop = $('body').scrollTop();
+	
+	var bodyHeight = $('body').height();
+	
+	var windowHeight = $(window).height();
+	
+	var limite = bodyHeight - windowHeight - (windowHeight/50)
+
+
+	
+	if (scrollTop > limite)
+	{
+		$(document).unbind('scroll');
+		carregaProximaPagina()
+	}
+	
+	
+}
+
 var cacheUsuarios = [];
+var backupTabela = null;
+
 
 $(function () {
+	backupTabela = $('#example').clone();
+	
     carregaDadosUsuario();
     ativaValidacao();
     carregaPerfis();
 	carregaStatusMatricula();
 
-    
+	inicia();
+	
+});
+
+function fnFiltroUsuario()
+{
+	$(document).unbind('scroll');
+	
+	
+	var e = $('#example');
+	var p = e.parent();
+	
+	e.remove();
+	
+	e = backupTabela.clone();
+	p.append(e);
+	
+	inicia();
+	
+}
+
+function inicia() {
 	var mytime = setInterval(function() { 
 	
 		$('#loader2').show(); 
 	
 	}, 100); 
+	
     $.ajax({            //Função AJAX
         url: configuracoes.baseURL + "entities/usuarios.asp",          //Arquivo asp
-        type: "post",                //Método de envio
-        data: "{}",   //Dados
+        type: "get",                //Método de envio
+        data: "filtroUsuario="+$('#filtroUsuario').val(),   //Dados
         success: function (arrayDeDados) {         //Sucesso no AJAX
             var repetidor = $('.repeat').clone();
             var pai = $('.repeat').parent();
@@ -375,6 +471,8 @@ $(function () {
             cacheUsuarios = $.parseJSON(arrayDeDados);
             $($.parseJSON(arrayDeDados)).each(function (posicao, dado) {
 
+				codUltimo = dado.strNome
+			
                 var clone = repetidor.clone();
 
                 $(clone).find('.field').each(function (numObjeto, objetoContainer) {
@@ -405,21 +503,21 @@ $(function () {
                 language: {
                     "url": "http://cdn.datatables.net/plug-ins/1.10.11/i18n/Portuguese-Brasil.json"
                 },
-                pageLength: 50,
+				paging : false,
                 columns: [
 					{ "orderable": true },
 					{ "orderable": true },
                     { "orderable": true },
 					{ "orderable": true },
 					{ "orderable": true },
-                    { "orderable": true },
+					{ "orderable": true },
                     { "orderable": false },
                     { "orderable": false },
 			        { "orderable": false },
                 ],
                 order: [[1, "asc"]],
                 //colReorder: true,
-                rowReorder: true,
+                //rowReorder: true,
                 select: {
                     style: 'os'
                 },
@@ -427,20 +525,21 @@ $(function () {
                     { responsivePriority: 1, targets: 0 },
                     { responsivePriority: 2, targets: -8 },
                     { responsivePriority: 3, targets: -1 }
-                ]
+                ],
                 //dom: 'Bfrtip',
                 //buttons: ['print', 'excel', 'pdf']
-
+				bFilter: false
             });
 			
 			clearInterval(mytime);
 			$('#loader2').hide();
 			$('#example').show();
 
+			$(document).on('scroll', bodyScroll);
         },
 
         complete: function () {
             
         }
-    })
-});
+    });	
+}
