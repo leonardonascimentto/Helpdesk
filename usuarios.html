@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 	<link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <title>Usuários | Quantum</title>
+    <title>Usuários | QuantumApp</title>
 
     <!-- Vendor CSS -->
     <link href="vendors/bower_components/animate.css/animate.min.css" rel="stylesheet">
@@ -49,9 +49,9 @@
             <li class="pull-right">
                 <ul class="hi-menu">
 
-                    <!--<li data-ma-action="search-open">
+                    <li data-ma-action="search-open">
                         <a href="#"><i class="him-icon zmdi zmdi-search"></i></a>
-                    </li>-->
+                    </li>
 
                     <li class="dropdown">
                         <a data-toggle="dropdown" href="#"><i class="him-icon zmdi zmdi-more-vert"></i></a>
@@ -72,10 +72,11 @@
         </ul>
 
         <!-- Top Search Content -->
-        <div class="h-search-wrap">
+         <div class="h-search-wrap">
             <div class="hsw-inner">
                 <i class="hsw-close zmdi zmdi-arrow-left" data-ma-action="search-close"></i>
-                <input type="text">
+                <input type="text" name="filtroUsuario" id="filtroUsuario">
+				<button type="button" class="btn bgm-teal" id="buttonFiltroUsuario" onClick="fnFiltroUsuario()">Ir</button>
             </div>
         </div>
     </header>
@@ -127,7 +128,8 @@
 								<p>Carregando...</p>
 							</div>
 						</div>
-                    <div class="table-responsive">
+						
+                    <div class="table-responsive">						
 						
                         <table id="example" class="table table-striped table-bordered responsive nowrap" cellspacing="0" width="100%" style="display:none;">
                             <thead>
@@ -141,7 +143,6 @@
                                     <th>Telefone</th>
                                     <th>Celular</th>
                                     <th>&nbsp;</th>
-
                                 </tr>
                             </thead>
                             <tbody>
@@ -173,7 +174,8 @@
                                     </td>
                                 </tr>
                             </tbody>
-                        </table>
+                        </table> 
+						<div style="display:none" class="loaderPaginacaoInfinita"><img src="img/carregando.gif"></div>
                     </div>
                 </div>
             </div>
@@ -181,7 +183,7 @@
     </section>
 
     <footer id="footer">
-        Copyright &copy; 2016 QuantumApp
+        Copyright &copy; 2017 QuantumApp
     </footer>
 
     <!-- Page Loader -->
