@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 
 <html>
@@ -287,3 +288,294 @@
 
 </body>
 </html>
+=======
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <title>Acesso | QuantumApp</title>
+
+    <!-- Vendor CSS -->
+    <link href="vendors/bower_components/animate.css/animate.min.css" rel="stylesheet">
+    <link href="vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css" rel="stylesheet">
+    <!-- CSS -->
+    <link href="css/app_1.min.css" rel="stylesheet">
+    <link href="css/app_2.min.css" rel="stylesheet">
+
+    <style>
+        .error {
+            font-size: 12px;
+            color: red;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="login-content">
+
+        <!-- Login -->
+        <div class="lc-block toggled" id="l-login">
+
+			<div class="p-0 p-b-15">
+                <img src="img/logo_part1.png">
+            </div>
+		
+            <div id="errologin" class="alert alert-danger alert-dismissable">
+                <strong>Atenção!</strong><br /> Email ou senha inválidos.
+            </div>            
+
+            <form id="form" name="form" role="form">
+                <div class="lcb-form">
+                    <div class="input-group m-b-20">
+                        <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                        <div class="fg-line">
+                            <input type="email" class="form-control" id="emailLogin" name="emailLogin" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="input-group m-b-20">
+                        <span class="input-group-addon"><i class="zmdi zmdi-lock"></i></span>
+                        <div class="fg-line">
+                            <input type="password" class="form-control" id="passwordLogin" name="passwordLogin" placeholder="Senha">
+                        </div>
+                    </div>
+                    <!--<div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="">
+                            <i class="input-helper"></i>
+                            Manter conectado
+                        </label>
+                    </div>-->
+                    <button type="submit" class="btn btn-login btn-success btn-float"><i class="zmdi zmdi-arrow-forward"></i></button>
+                </div>
+            </form>
+            <div class="lcb-navigation">
+                <!-- <a href="#" data-ma-action="login-switch" data-ma-block="#l-register"><i class="zmdi zmdi-plus"></i> <span>Cadastrar</span></a> -->
+                <a href="#" data-ma-action="login-switch" data-ma-block="#l-forget-password"><i>?</i> <span>Esqueci a Senha</span></a>
+            </div>
+
+        </div>
+
+        <!-- Register -->
+        <div class="lc-block" id="l-register">
+			
+			<div class="p-0 p-b-15">
+                <img src="img/logo_part1.png">
+            </div>
+			
+            <div id="errocadastro" class="alert alert-danger alert-dismissable">
+                <strong>Atenção!</strong><br />Preencha os dados corretamente.
+            </div>
+
+            <form id="formcadastro" name="formcadastro" role="form" method="post">
+                <div class="lcb-form">
+                    <div class="input-group m-b-20">
+                        <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                        <div class="fg-line">
+                            <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome">
+                        </div>
+                    </div>
+                    <div class="input-group m-b-20">
+                        <span class="input-group-addon"><i class="zmdi zmdi-email"></i></span>
+                        <div class="fg-line">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="input-group m-b-20">
+                        <span class="input-group-addon"><i class="zmdi zmdi-graduation-cap"></i></span>
+                        <div class="fg-line">
+                            <input type="text" class="form-control" id="ra" name="ra" placeholder="Ra">
+                        </div>
+                    </div>
+                    <div class="input-group m-b-20">
+                        <span class="input-group-addon"><i class="zmdi zmdi-assignment-account"></i></span>
+                        <div class="fg-line">
+                            <input type="text" class="form-control" id="cpf" name="cpf" placeholder="Cpf">
+                        </div>
+                    </div>
+                    <div class="input-group m-b-20">
+                        <span class="input-group-addon"><i class="zmdi zmdi-phone"></i></span>
+                        <div class="fg-line">
+                            <input type="text" class="form-control" id="telefone" name="telefone" placeholder="Telefone">
+                        </div>
+                    </div>
+                    <div class="input-group m-b-20">
+                        <span class="input-group-addon"><i class="zmdi zmdi-smartphone"></i></span>
+                        <div class="fg-line">
+                            <input type="text" class="form-control" id="celular" name="celular" placeholder="Celular">
+                        </div>
+                    </div>
+                    <div class="input-group m-b-20">
+                        <span class="input-group-addon"><i class="zmdi zmdi-lock"></i></span>
+                        <div class="fg-line">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Senha">
+                        </div>
+                    </div>
+                    <div class="input-group m-b-20">
+                        <span class="input-group-addon"><i class="zmdi zmdi-lock-outline"></i></span>
+                        <div class="fg-line">
+                            <input type="password" class="form-control" id="confirmapassword" name="confirmapassword" placeholder="Confirmar Senha">
+                        </div>
+                    </div>
+                    <button type="submit" onclick="valida($('#formcadastro'))" class="btn btn-login btn-success btn-float"><i class="zmdi zmdi-check"></i></button>
+                </div>
+            </form>
+            <div class="lcb-navigation">
+                <a href="#" data-ma-action="login-switch" data-ma-block="#l-login"><i class="zmdi zmdi-long-arrow-left"></i> <span>Entrar</span></a>
+                <a href="#" data-ma-action="login-switch" data-ma-block="#l-forget-password"><i>?</i> <span>Esqueci a Senha</span></a>
+            </div>
+        </div>
+
+        <!-- Forgot Password -->
+        <div class="lc-block" id="l-forget-password">
+
+			<div class="p-0 p-b-15">
+                <img src="img/logo_part1.png">
+            </div>
+		
+            <div id="sucessoesqueci" class="alert alert-success" role="alert" style="display: none">
+                Sua senha foi enviada para o email informado.
+            </div>
+
+            <div id="erroesqueci" class="alert alert-danger" role="alert" style="display: none">
+                <strong>Atenção!</strong><br /> Email não encontrado.
+            </div>
+
+            <form id="formesqueci" name="formesqueci" role="form">
+                <div class="lcb-form">
+                    <p class="text-left">Informe o email cadastrado para receber sua senha.</p>
+                    <div class="input-group m-b-20">
+                        <span class="input-group-addon"><i class="zmdi zmdi-email"></i></span>
+                        <div class="fg-line">
+                            <input type="email" class="form-control" id="emailesqueci" name="emailesqueci" placeholder="Email">
+                        </div>
+                    </div>
+                    <button type="button" onclick="enviarEmail(); return false;" class="btn btn-login btn-success btn-float"><i class="zmdi zmdi-mail-send"></i></button>
+                </div>
+                <div class="lcb-navigation">
+                    <a href="#" data-ma-action="login-switch" data-ma-block="#l-login"><i class="zmdi zmdi-long-arrow-left"></i> <span>Entrar</span></a>
+                    <!-- <a href="#" data-ma-action="login-switch" data-ma-block="#l-register"><i class="zmdi zmdi-plus"></i> <span>Cadastrar</span></a> -->
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Javascript Libraries -->
+    <script src="vendors/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="vendors/bower_components/Waves/dist/waves.min.js"></script>
+
+    <script src="vendors/bower_components/jquery-mask-plugin/dist/jquery.mask.min.js"></script>
+
+    <script src="js/app.min.js"></script>
+
+    <script src="scripts/config.js"></script>
+    <script src="scripts/login.js"></script>
+    <script src="scripts/validate.js"></script>
+    <script src="services/usuario.js"></script>
+    <script src="scripts/esqueciSenha.js"></script>
+    <script src="scripts/util.js"></script>
+    <script src="services/menu.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#cpf").mask("000.000.000-00");
+            $("#telefone").mask("(00) 0000-0000");
+            $("#celular").mask("(00) 00000-0000");
+            $('#formcadastro').validate({
+                rules: {
+                    nome: {
+                        required: true,
+                        maxlength: 50
+                    },
+                    email: {
+                        required: true,
+                        email: true,
+                        maxlength: 100,
+                        remote: configuracoes.baseURL + 'entities/VerificarEmail.asp'
+                    },
+                    ra: {
+                        number: true,
+                        maxlength: 10
+                    },
+                    password: {
+                        required: true,
+                        minlength: 4,
+                        maxlength: 15
+                    },
+                    confirmapassword: {
+                        required: true,
+                        minlength: 4,
+                        maxlength: 15,
+                        equalTo: '#password'
+                    }
+                },
+                messages: {
+                    nome: {
+                        required: "Digite seu nome",
+                        maxlength: "O campo \"Nome\" pode ter, no máximo, 50 caracteres"
+                    },
+                    email: {
+                        required: "Digite seu email",
+                        email: "O campo \"Email\" deve conter um email válido",
+                        maxlength: "O campo \"Email\" pode ter, no máximo, 100 caracteres",
+                        remote: "O email informado já está em uso. Escolha outro email"
+                    },
+                    ra: {
+                        number: "Digite apenas números",
+                        maxlength: "O campo \"Ra\" pode ter, no máximo, 10 caracteres"
+                    },
+                    password: {
+                        required: "Digite uma senha",
+                        minlength: "A senha deve conter, no mínimo, 4 caracteres",
+                        maxlength: "A senha pode ter, no máximo, 15 caracteres"
+                    },
+                    confirmapassword: {
+                        required: "Repita a senha",
+                        minlength: "A confirmação da senha deve conter, no mínimo, 4 caracteres",
+                        maxlength: "A confirmação da senha pode ter, no máximo, 15 caracteres",
+                        equalTo: "O campo \"Confirmar Senha\" deve ser igual ao campo \"Senha\"!"
+                    }
+                }
+            });
+        });
+
+        $(document).ready(function () {
+            $('#errocadastro').hide(); //Esconde o elemento com id erro
+            $('#formcadastro').submit(function () {   //Ao submeter formulário
+                var nome = $('#nome').val();    //Pega valor do campo nome
+                var email = $('#email').val();  //Pega valor do campo email
+                var ra = $('#ra').val();  //Pega valor do campo email
+                var cpf = $('#cpf').val();  //Pega valor do campo email
+                var telefone = $('#telefone').val();  //Pega valor do campo email
+                var celular = $('#celular').val();  //Pega valor do campo email
+                var password = $('#password').val();  //Pega valor do campo senha
+
+                var usuarioData = { nome: nome, email: email, ra: ra, cpf: cpf, telefone: telefone, celular: celular, password: password, codPerfil: 0 };
+                var success = function (result) {         //Sucesso no AJAX
+                    if (result != '0') {
+                        location.href = 'index.html'  //Redireciona
+                    } else {
+                        $('#errocadastro').show();      //Informa o erro
+                    }
+                };
+
+                usuarioService.insert(usuarioData, success);
+                return false;   //Evita que a página seja atualizada
+            })
+        });
+		
+		function valida(formulario) {
+			if (formulario.valid()) {
+				formulario.submit();
+			}
+		}
+    </script>
+
+</body>
+</html>
+>>>>>>> origin/master
