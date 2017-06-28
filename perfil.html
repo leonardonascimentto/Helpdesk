@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="iso-8859-1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <title>Meu Perfil | QuantumApp</title>
+
+    <!-- Vendor CSS -->
+    <link href="vendors/bower_components/animate.css/animate.min.css" rel="stylesheet">
+    <link href="vendors/bower_components/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
+    <link href="vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css" rel="stylesheet">
+    <link href="vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet">
+
+    <!-- CSS -->
+    <link href="css/app_1.min.css" rel="stylesheet">
+    <link href="css/app_2.min.css" rel="stylesheet">
+	
+	<style>
+        .error {
+            font-size: 12px;
+            color: red;
+        }
+    </style>
+	
+</head>
+
+<body>
+    <header id="header" class="clearfix" data-ma-theme="teal">
+        <ul class="h-inner">
+            <li class="hi-trigger ma-trigger" data-ma-action="sidebar-open" data-ma-target="#sidebar">
+                <div class="line-wrap">
+                    <div class="line top"></div>
+                    <div class="line center"></div>
+                    <div class="line bottom"></div>
+                </div>
+            </li>
+
+            <li class="hi-logo">
+                <a href="home.html" class="m-l-10">
+                    Meu Perfil
+                </a>
+            </li>
+
+            <li class="pull-right">
+                <ul class="hi-menu">
+
+                    <!--<li data-ma-action="search-open">
+                        <a href="#"><i class="him-icon zmdi zmdi-search"></i></a>
+                    </li>-->
+
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" href="#"><i class="him-icon zmdi zmdi-more-vert"></i></a>
+                        <ul class="dropdown-menu dm-icon pull-right">
+                            <li class="hidden-xs">
+                                <a data-ma-action="fullscreen" href="#"><i class="zmdi zmdi-fullscreen"></i> Fullscreen</a>
+                            </li>
+                            <li>
+                                <a data-ma-action="clear-localstorage" href="#"><i class="zmdi zmdi-delete"></i> Remover Cache</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" onClick="window.location.reload()" alt="Atualizar"><i class="zmdi zmdi-refresh"></i> Atualizar</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+        <!-- Top Search Content -->
+        <div class="h-search-wrap">
+            <div class="hsw-inner">
+                <i class="hsw-close zmdi zmdi-arrow-left" data-ma-action="search-close"></i>
+                <input type="text">
+            </div>
+        </div>
+    </header>
+
+    <section id="main">
+        <aside id="sidebar" class="sidebar c-overflow">
+            <div class="s-profile">
+                <a href="#" data-ma-action="profile-menu-toggle">
+                    <div class="sp-pic avatar">
+                        <img class="img-circle profile-image" src="images/profile.jpg" alt="profile">
+                    </div>
+
+                    <div class="sp-info nomeUsuario">
+                        <i class="zmdi zmdi-caret-down"></i>
+                    </div>
+                </a>
+
+                <ul class="main-menu">
+                    <li>
+                        <a href="perfil.html"><i class="zmdi zmdi-account"></i> Meu Perfil</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" onclick="signout()" alt="Sair"><i class="zmdi zmdi-time-restore"></i> Sair</a>
+                    </li>
+                </ul>
+            </div>
+
+            <ul class="main-menu" id="ulMenu"></ul>
+        </aside>
+
+        <section id="content">
+            <div class="container container-alt">
+
+                <div class="card" id="profile-main">
+                    <div class="pm-overview c-overflow">
+
+                        <div class="pmo-pic">
+                            <div class="p-relative avatar">
+                                <a href="#">
+                                    <img class="img-circle profile-image" src="images/profile.jpg" alt="profile">
+                                </a>
+
+                                <a href="#" class="pmop-edit">
+                                    <i class="zmdi zmdi-camera"></i> <span class="hidden-xs">Alterar foto</span>
+                                </a>
+                            </div>
+
+                            <div class="pmo-stat perfilUsuario">
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pm-body clearfix">
+
+                        <div class="pmb-block">
+                            <div class="pmbb-header">
+                                <h2><i class="zmdi zmdi-account m-r-10"></i> Meus Dados</h2>
+
+                                <ul class="actions">
+                                    <li class="dropdown">
+                                        <a href="#" data-toggle="dropdown">
+                                            <i class="zmdi zmdi-more-vert"></i>
+                                        </a>
+
+                                        <ul class="dropdown-menu dropdown-menu-right">
+                                            <li>
+                                                <a href="#" onclick="editar()"><i class="zmdi zmdi-edit"></i> Alterar</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="pmbb-body p-l-30">
+                                <div class="pmbb-view">
+                                    <dl class="dl-horizontal">
+                                        <dt>Nome</dt>
+                                        <dd data-field="strNome"></dd>
+                                    </dl>
+                                    <dl class="dl-horizontal">
+                                        <dt>Email</dt>
+                                        <dd data-field="strEmail"></dd>
+                                    </dl>
+                                    <dl class="dl-horizontal">
+                                        <dt>Ra</dt>
+                                        <dd data-field="strMatricula"></dd>
+                                    </dl>
+                                    <dl class="dl-horizontal">
+                                        <dt>Cpf</dt>
+                                        <dd data-field="strCpf"></dd>
+                                    </dl>
+                                    <dl class="dl-horizontal">
+                                        <dt>Telefone</dt>
+                                        <dd data-field="strTel1"></dd>
+                                    </dl>
+                                    <dl class="dl-horizontal">
+                                        <dt>Celular</dt>
+                                        <dd data-field="strTel2"></dd>
+                                    </dl>
+                                    <dl class="dl-horizontal">
+                                        <dt>Senha</dt>
+                                        <dd data-field="strSenha"></dd>
+                                    </dl>
+                                </div>
+								<form id="formEdicao" name="formEdicao" class="form-horizontal" role="form">
+									<div class="pmbb-edit">
+										<dl class="dl-horizontal">
+											<dt class="p-t-10">Nome</dt>
+											<dd>
+												<div class="fg-line">
+													<input data-field="codUsuario" data-name="codUsuario" type="hidden" class="campo">
+													<input data-field="strNome" data-name="nome" type="text" class="form-control campo" id="strNome" name="strNome" >
+												</div>
+
+											</dd>
+										</dl>
+										<dl class="dl-horizontal">
+											<dt class="p-t-10">Email</dt>
+											<dd>
+												<div class="fg-line">
+													<input data-field="strEmail" data-name="email" type="email" class="form-control campo" id="strEmail" name="strEmail" >
+												</div>
+											</dd>
+										</dl>
+										<dl class="dl-horizontal">
+											<dt class="p-t-10">Ra</dt>
+											<dd>
+												<div class="fg-line">
+													<input data-field="strMatricula" data-name="ra" type="text" class="form-control campo" id="strMatricula" name="strMatricula" >
+												</div>
+											</dd>
+										</dl>
+										<dl class="dl-horizontal">
+											<dt class="p-t-10">Cpf</dt>
+											<dd>
+												<div class="fg-line">
+													<input data-field="strCpf" data-name="cpf" type="text" class="form-control campo" id="strCpf" name="strCpf" >
+												</div>
+											</dd>
+										</dl>
+										<dl class="dl-horizontal">
+											<dt class="p-t-10">Telefone</dt>
+											<dd>
+												<div class="fg-line">
+													<input data-field="strTel1" data-name="telefone" type="text" class="form-control campo" id="strTel1" name="strTel1" >
+												</div>
+											</dd>
+										</dl>
+										<dl class="dl-horizontal">
+											<dt class="p-t-10">Celular</dt>
+											<dd>
+												<div class="fg-line">
+													<input data-field="strTel2" data-name="celular" type="text" class="form-control campo" id="strTel2" name="strTel2" >
+												</div>
+											</dd>
+										</dl>
+										<dl class="dl-horizontal">
+											<dt class="p-t-10">Senha</dt>
+											<dd>
+												<div class="fg-line">
+													<input data-field="strSenha" data-name="password" type="text" class="form-control campo" id="strSenha" name="strSenha" >
+												</div>
+											</dd>
+										</dl>
+
+										<div class="m-t-30">
+											<button class="btn bgm-teal" onclick="salvar()">Salvar</button>
+											<button class="btn btn-default" onclick="visualizar()">Cancelar</button>
+										</div>
+									</div>
+								</form>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <footer id="footer">
+        Copyright &copy; 2017 QuantumApp
+    </footer>
+
+    <!-- Page Loader -->
+    <div class="page-loader">
+        <div class="preloader pls-green">
+            <svg class="pl-circular" viewBox="25 25 50 50">
+                <circle class="plc-path" cx="50" cy="50" r="20" />
+            </svg>
+
+            <p>Carregando...</p>
+        </div>
+    </div>
+
+    <!-- Javascript Libraries -->
+    <script src="vendors/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <script src="vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="vendors/bower_components/Waves/dist/waves.min.js"></script>
+    <script src="vendors/bootstrap-growl/bootstrap-growl.min.js"></script>
+    <script src="vendors/bower_components/sweetalert2/dist/sweetalert2.min.js"></script>
+    <script src="vendors/bower_components/moment/min/moment.min.js"></script>
+
+    <script src="vendors/bower_components/jquery-mask-plugin/dist/jquery.mask.min.js"></script>
+
+    <script src="js/app.min.js"></script>
+
+    <script src="scripts/validate.js"></script>
+    <script src="scripts/config.js"></script>
+    <script src="scripts/jquery.cookie.js"></script>
+    <script src="scripts/perfil.js"></script>
+    <script src="scripts/util.js"></script>
+    <script src="scripts/LINQ_JS_MIN.js"></script>
+    <script src="services/usuario.js"></script>
+    <script src="services/menu.js"></script>
+</body>
+
+</html>
