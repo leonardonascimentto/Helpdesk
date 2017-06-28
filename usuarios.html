@@ -1,13 +1,13 @@
-Ôªø<!DOCTYPE html>
+<!DOCTYPE html>
 
 <html>
 <head>
-    <meta charset="utf-8">
+    <meta charset="iso-8859-1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 	<link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <title>Usu√°rios | Quantum</title>
+    <title>Usu·rios | QuantumApp</title>
 
     <!-- Vendor CSS -->
     <link href="vendors/bower_components/animate.css/animate.min.css" rel="stylesheet">
@@ -42,16 +42,16 @@
 
             <li class="hi-logo">
                 <a href="home.html" class="m-l-10">
-                    Usu√°rios
+                    Usu·rios
                 </a>
             </li>
 
             <li class="pull-right">
                 <ul class="hi-menu">
 
-                    <!--<li data-ma-action="search-open">
+                    <li data-ma-action="search-open">
                         <a href="#"><i class="him-icon zmdi zmdi-search"></i></a>
-                    </li>-->
+                    </li>
 
                     <li class="dropdown">
                         <a data-toggle="dropdown" href="#"><i class="him-icon zmdi zmdi-more-vert"></i></a>
@@ -72,10 +72,11 @@
         </ul>
 
         <!-- Top Search Content -->
-        <div class="h-search-wrap">
+         <div class="h-search-wrap">
             <div class="hsw-inner">
                 <i class="hsw-close zmdi zmdi-arrow-left" data-ma-action="search-close"></i>
-                <input type="text">
+                <input type="text" name="filtroUsuario" id="filtroUsuario">
+				<button type="button" class="btn bgm-teal" id="buttonFiltroUsuario" onClick="fnFiltroUsuario()">Ir</button>
             </div>
         </div>
     </header>
@@ -115,8 +116,8 @@
                 <div class="card">
 
                     <div id="erro" class="alert alert-danger alert-dismissable" style="display:none;">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">√ó</button>
-                        <strong>Aten√ß√£o!</strong> Ocorreu um problema. Tente novamente.
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">◊</button>
+                        <strong>AtenÁ„o!</strong> Ocorreu um problema. Tente novamente.
                     </div>
 						<div class="page-loader" id="loader2" style="position:relative; top: 50px; left: 130px; z-index: 1000">
 							<div class="preloader pls-green">
@@ -127,7 +128,8 @@
 								<p>Carregando...</p>
 							</div>
 						</div>
-                    <div class="table-responsive">
+						
+                    <div class="table-responsive">						
 						
                         <table id="example" class="table table-striped table-bordered responsive nowrap" cellspacing="0" width="100%" style="display:none;">
                             <thead>
@@ -141,7 +143,6 @@
                                     <th>Telefone</th>
                                     <th>Celular</th>
                                     <th>&nbsp;</th>
-
                                 </tr>
                             </thead>
                             <tbody>
@@ -173,7 +174,8 @@
                                     </td>
                                 </tr>
                             </tbody>
-                        </table>
+                        </table> 
+						<div style="display:none" class="loaderPaginacaoInfinita"><img src="img/carregando.gif"></div>
                     </div>
                 </div>
             </div>
@@ -181,7 +183,7 @@
     </section>
 
     <footer id="footer">
-        Copyright &copy; 2016 QuantumApp
+        Copyright &copy; 2017 QuantumApp
     </footer>
 
     <!-- Page Loader -->
@@ -222,7 +224,7 @@
         function notify(from, align, icon, type, animIn, animOut, message) {
             $.growl({
                 icon: icon,
-                title: ' Aten√ß√£o: ',
+                title: ' AtenÁ„o: ',
                 message: message,
                 url: ''
             }, {
@@ -266,13 +268,13 @@
         //Warning Message
         $('#sa-warning').click(function () {
             swal({
-                title: "Aten√ß√£o: ",
-                text: "Deseja realmente excluir o usu√°rio?",
+                title: "AtenÁ„o: ",
+                text: "Deseja realmente excluir o usu·rio?",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonText: "Sim",
             }).then(function () {
-                swal("Exclu√≠do!", "O usu√°rio foi exclu√≠do com sucesso.", "success");
+                swal("ExcluÌdo!", "O usu·rio foi excluÌdo com sucesso.", "success");
             });
         });
 
@@ -284,7 +286,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel"> Novo Usu√°rio</h4>
+                    <h4 class="modal-title" id="myModalLabel"> Novo Usu·rio</h4>
                 </div>
                 <div class="modal-body">
 					
@@ -361,7 +363,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel"> Alterar Usu√°rio</h4>
+                    <h4 class="modal-title" id="myModalLabel"> Alterar Usu·rio</h4>
                 </div>
                 <div class="modal-body">
                     <form id="formEdicao" name="formEdicao" class="form-horizontal" role="form">

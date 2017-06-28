@@ -87,22 +87,22 @@ function ativaValidacao() {
         messages: {
             strNome: {
                 required: "Digite seu nome",
-                maxlength: "O campo \"Nome\" pode ter, no m√°ximo, 50 caracteres"
+                maxlength: "O campo \"Nome\" pode ter, no m·ximo, 50 caracteres"
             },
             strEmail: {
                 required: "Digite seu email",
-                email: "O campo \"Email\" deve conter um email v√°lido",
-                maxlength: "O campo \"Email\" pode ter, no m√°ximo, 100 caracteres",
-                remote: "O email informado j√° est√° em uso. Escolha outro email"
+                email: "O campo \"Email\" deve conter um email v·lido",
+                maxlength: "O campo \"Email\" pode ter, no m·ximo, 100 caracteres",
+                remote: "O email informado j· est· em uso. Escolha outro email"
             },
             strMatricula: {
-                number: "Digite apenas n√∫meros",
-                maxlength: "O campo \"Ra\" pode ter, no m√°ximo, 10 caracteres"
+                number: "Digite apenas n˙meros",
+                maxlength: "O campo \"Ra\" pode ter, no m·ximo, 10 caracteres"
             },
             strSenha: {
                 required: "Digite uma senha",
-                minlength: "A senha deve conter, no m√≠nimo, 4 caracteres",
-                maxlength: "A senha pode ter, no m√°ximo, 15 caracteres"
+                minlength: "A senha deve conter, no mÌnimo, 4 caracteres",
+                maxlength: "A senha pode ter, no m·ximo, 15 caracteres"
             }
         }
     });

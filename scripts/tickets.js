@@ -41,7 +41,7 @@ function inserirTicket() {
 			codUsuarioSelecionadoInclusao = 0;
 			nomeUsuarioSelecionado = "";
         } else {
-            alert('Inclua um usu√°rio v√°lido.');
+            alert('Inclua um usu·rio v·lido.');
         }
     };
 
@@ -167,7 +167,7 @@ function carregaComentarios(ID, tr) {
 				$('#ulComentarios').append(li);				
 			});
 		} else {
-			var li = '<li class="semcomentario"><div class="alert alert-info alert-dismissable">Ainda n√£o existem coment√°rios</div></li>';
+			var li = '<li class="semcomentario"><div class="alert alert-info alert-dismissable">Ainda n„o existem coment·rios</div></li>';
 			$('#ulComentarios').append(li);			
 		}
 		

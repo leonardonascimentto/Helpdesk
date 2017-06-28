@@ -1,13 +1,13 @@
-Ôªø<!DOCTYPE html>
+<!DOCTYPE html>
 
 <html>
 <head>
-    <meta charset="utf-8">
+    <meta charset="iso-8859-1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 	<link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <title>Acesso | Quantum</title>
+    <title>Acesso | QuantumApp</title>
 
     <!-- Vendor CSS -->
     <link href="vendors/bower_components/animate.css/animate.min.css" rel="stylesheet">
@@ -35,7 +35,7 @@
             </div>
 		
             <div id="errologin" class="alert alert-danger alert-dismissable">
-                <strong>Aten√ß√£o!</strong><br /> Email ou senha inv√°lidos.
+                <strong>AtenÁ„o!</strong><br /> Email ou senha inv·lidos.
             </div>            
 
             <form id="form" name="form" role="form">
@@ -77,7 +77,7 @@
             </div>
 			
             <div id="errocadastro" class="alert alert-danger alert-dismissable">
-                <strong>Aten√ß√£o!</strong><br />Preencha os dados corretamente.
+                <strong>AtenÁ„o!</strong><br />Preencha os dados corretamente.
             </div>
 
             <form id="formcadastro" name="formcadastro" role="form" method="post">
@@ -151,7 +151,7 @@
             </div>
 
             <div id="erroesqueci" class="alert alert-danger" role="alert" style="display: none">
-                <strong>Aten√ß√£o!</strong><br /> Email n√£o encontrado.
+                <strong>AtenÁ„o!</strong><br /> Email n„o encontrado.
             </div>
 
             <form id="formesqueci" name="formesqueci" role="form">
@@ -226,27 +226,27 @@
                 messages: {
                     nome: {
                         required: "Digite seu nome",
-                        maxlength: "O campo \"Nome\" pode ter, no m√°ximo, 50 caracteres"
+                        maxlength: "O campo \"Nome\" pode ter, no m·ximo, 50 caracteres"
                     },
                     email: {
                         required: "Digite seu email",
-                        email: "O campo \"Email\" deve conter um email v√°lido",
-                        maxlength: "O campo \"Email\" pode ter, no m√°ximo, 100 caracteres",
-                        remote: "O email informado j√° est√° em uso. Escolha outro email"
+                        email: "O campo \"Email\" deve conter um email v·lido",
+                        maxlength: "O campo \"Email\" pode ter, no m·ximo, 100 caracteres",
+                        remote: "O email informado j· est· em uso. Escolha outro email"
                     },
                     ra: {
-                        number: "Digite apenas n√∫meros",
-                        maxlength: "O campo \"Ra\" pode ter, no m√°ximo, 10 caracteres"
+                        number: "Digite apenas n˙meros",
+                        maxlength: "O campo \"Ra\" pode ter, no m·ximo, 10 caracteres"
                     },
                     password: {
                         required: "Digite uma senha",
-                        minlength: "A senha deve conter, no m√≠nimo, 4 caracteres",
-                        maxlength: "A senha pode ter, no m√°ximo, 15 caracteres"
+                        minlength: "A senha deve conter, no mÌnimo, 4 caracteres",
+                        maxlength: "A senha pode ter, no m·ximo, 15 caracteres"
                     },
                     confirmapassword: {
                         required: "Repita a senha",
-                        minlength: "A confirma√ß√£o da senha deve conter, no m√≠nimo, 4 caracteres",
-                        maxlength: "A confirma√ß√£o da senha pode ter, no m√°ximo, 15 caracteres",
+                        minlength: "A confirmaÁ„o da senha deve conter, no mÌnimo, 4 caracteres",
+                        maxlength: "A confirmaÁ„o da senha pode ter, no m·ximo, 15 caracteres",
                         equalTo: "O campo \"Confirmar Senha\" deve ser igual ao campo \"Senha\"!"
                     }
                 }
@@ -255,7 +255,7 @@
 
         $(document).ready(function () {
             $('#errocadastro').hide(); //Esconde o elemento com id erro
-            $('#formcadastro').submit(function () {   //Ao submeter formul√°rio
+            $('#formcadastro').submit(function () {   //Ao submeter formul·rio
                 var nome = $('#nome').val();    //Pega valor do campo nome
                 var email = $('#email').val();  //Pega valor do campo email
                 var ra = $('#ra').val();  //Pega valor do campo email
@@ -274,7 +274,7 @@
                 };
 
                 usuarioService.insert(usuarioData, success);
-                return false;   //Evita que a p√°gina seja atualizada
+                return false;   //Evita que a p·gina seja atualizada
             })
         });
 		

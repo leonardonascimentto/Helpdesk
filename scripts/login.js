@@ -14,6 +14,8 @@ $(document).ready(function () {
                     session.set("codUsuario", usuario.codUsuario);
                     session.set("nomeUsuario", usuario.strNome);
 					session.set("codPerfil", usuario.codPerfil);
+					session.set("email", email);
+					session.set("password", password);
                     if (navigator.notification)
                         navigator.notification.beep(1);
                     location.href = 'home.html';

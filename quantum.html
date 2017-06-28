@@ -7,10 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 	<link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <title>Início | QuantumApp</title>
+    <title>Quantum | QuantumApp</title>
 
     <!-- Vendor CSS -->
-    <link href="vendors/bower_components/animate.css/animate.min.css" rel="stylesheet">
+	<link href="vendors/bower_components/animate.css/animate.min.css" rel="stylesheet">
     <link href="vendors/bower_components/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
     <link href="vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css" rel="stylesheet">
     <link href="vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet">
@@ -33,7 +33,7 @@
 
             <li class="hi-logo">
                 <a href="home.html" class="m-l-10">
-                    QuantumApp
+                    Quantum
                 </a>
             </li>
 
@@ -69,6 +69,7 @@
                 <input type="text">
             </div>
         </div>
+
     </header>
 
     <section id="main">
@@ -99,58 +100,11 @@
 
         <section id="content">
             <div class="container">
-
-                <div class="mini-charts">
-                    <div class="row">
-                        <div class="col-sm-12 col-md-6">
-                            <div class="mini-charts-item bgm-bluegray">
-                                <div class="clearfix">
-                                    <div class="chart stats-bar"></div>
-                                    <div class="count">
-                                        <small>Todos</small>
-                                        <h2 class="todos">0</h2>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-12 col-md-6">
-                            <div class="mini-charts-item bgm-lightgreen">
-                                <div class="clearfix">
-                                    <div class="chart stats-bar-2"></div>
-                                    <div class="count">
-                                        <small>Aberto</small>
-                                        <h2 class="Aberto">0</h2>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-12 col-md-6">
-                            <div class="mini-charts-item bgm-lightblue">
-                                <div class="clearfix">
-                                    <div class="chart stats-bar"></div>
-                                    <div class="count">
-                                        <small>Em andamento</small>
-                                        <h2 class="Em_andamento">0</h2>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-12 col-md-6">
-                            <div class="mini-charts-item bgm-red">
-                                <div class="clearfix">
-                                    <div class="chart stats-bar-2"></div>
-                                    <div class="count">
-                                        <small>Finalizados</small>
-                                        <h2 class="Finalizado">0</h2>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+				<div class="card">
+					<iframe id="iframecursos" style="width: 100%; height: 500px;" src="" onload='iframeAutoHeight(this)' frameborder="0" scrolling="auto">
+                
+					</iframe>
+				</div>			
             </div>
         </section>
     </section>
@@ -161,7 +115,7 @@
 
     <!-- Page Loader -->
     <div class="page-loader">
-        <div class="preloader pls-green">
+        <div class="preloader pls-green" id="loader">
             <svg class="pl-circular" viewBox="25 25 50 50">
                 <circle class="plc-path" cx="50" cy="50" r="20" />
             </svg>
@@ -170,27 +124,45 @@
         </div>
     </div>
 
-
     <!-- Javascript Libraries -->
     <script src="vendors/bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>  
-	<script src="vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
-	<script src="vendors/bower_components/Waves/dist/waves.min.js"></script>
-    <script src="vendors/bootstrap-growl/bootstrap-growl.min.js"></script>	
+    <script src="vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="vendors/bower_components/Waves/dist/waves.min.js"></script>
+    <script src="vendors/bootstrap-growl/bootstrap-growl.min.js"></script>
 	<script src="vendors/bower_components/sweetalert2/dist/sweetalert2.min.js"></script>
-	
-    <script src="vendors/sparklines/jquery.sparkline.min.js"></script>
-    <script src="vendors/bower_components/moment/min/moment.min.js"></script>       
 
     <script src="js/app.min.js"></script>
-
-    <script src="scripts/config.js"></script>
+	<script src="js/frames.js"></script>
+	
     <script src="scripts/jquery.cookie.js"></script>
-    <script src="scripts/home.js"></script>
-    <script src="scripts/util.js"></script>
+    <script src="scripts/validate.js"></script>
     <script src="scripts/LINQ_JS_MIN.js"></script>
-    <script src="services/ticket.js"></script>
+    <script src="scripts/config.js"></script>    
+    <script src="services/usuario.js"></script>    
+    <script src="scripts/util.js"></script>
     <script src="services/menu.js"></script>
+
+    
+
+	<script>
+		$(function() {
+			var i = $('#iframecursos');
+			var login = session.get('email');
+			var senha = session.get('password');
+			
+			var redireciona = location.href.split('redireciona=')[1];
+			var caminho = configuracoes.baseURL + 'admin/logon/logon_post.asp?strLogin=@login&strSenha=@senha&redireciona_apos_logon=' + redireciona;
+			
+			caminho=caminho.replace('@login', login);
+			caminho=caminho.replace('@senha', senha);
+			
+			i.attr('src', caminho);
+			
+			carregaDadosUsuario();
+
+		});
+	</script>
 </body>
 
 </html>

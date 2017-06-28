@@ -57,9 +57,9 @@ function carregaDadosUsuario() {
     }
     else
 		
-        $.ajax({            //FunÃ§Ã£o AJAX
+        $.ajax({            //Função AJAX
             url: configuracoes.baseURL + "entities/usuarios.asp",          //Arquivo asp
-            type: "post",                //MÃ©todo de envio
+            type: "post",                //Método de envio
             data: "codUsuario=" + codUsuario,   //Dados
             success: function (arrayDeDados) {         //Sucesso no AJAX
                 var a = $.parseJSON(arrayDeDados);
@@ -139,7 +139,7 @@ function getItemFilho(label, link, icon) {
        classeAtivo = 'toggled active';
    }
    
-   var obj = '<li class="' + classeAtivo + '"><a href="' + link + '" title="InÃ­cio"><i class="' + icon + '"></i>'+ label +'</a></li>';
+   var obj = '<li class="' + classeAtivo + '"><a href="' + link + '" title="Início"><i class="' + icon + '"></i>'+ label +'</a></li>';
    
    return $(obj);
 }
